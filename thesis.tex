@@ -115,7 +115,32 @@
 
 
     \chapter{ Setup }
+        \section{ Laser Injection Testing }
+            %setup circuit, put in laser filter
+            \subsection{ Preperation }
+                %intro
+                The first step to performing laser injection testing is making sure that you use the probe station that is actually equipped with the Alessi Cutting Laser. You won't get far otherwise. Then you need to set up the circuit. Three probes are needed for the laser injection test. The convention I've used is a probe on each side at the back of the probe platform, with the third probe on the right towards the front of the platform, as visible in figure [TODO: picture-setup].
 
+                %bias probe
+                The probe at the front of the platform (the "bias probe", as it will be used to bias the sensor) should have a standard coaxial cable connecting it to the ground terminal of the splitter box.  
+                
+                %copper wire loop
+                The probe barrels of all three probes need to be attached to each other with small pieces of copper wire and aligator clips. The reason for this is to ensure that everything is properly grounded. If you fail to do this, data you receive on the oscilloscope with be useless (see figure [TODO: figure-side by side comparison of grounded to floating]). Additionally, you want to make sure that the copper wire loop is as small as possible. The loop acts like an inductor that introduces unwanted noise to the system. Minimizing the size of the loop reduces noise it produces. See figure [TODO: figure-side by side comparison of good copper loop to bad copper loop] for an example of how this should look.
+
+                %voltage dividers
+                Two of the probes need special voltage dividers attached to them. By my convention, these are always the two probes at the back of the station (in general, they are the probes you intend to touch down on the dc pads). Unscrew the coaxial cables from the probe barrels, and attach the voltage dividers in their place. There are two voltage dividers, labelled "1" and "2". It \textit{does} matter which probe they are plugged into. The voltage divider labelled "1" should be plugged into the "near" dc-pad probe, and "2" should be plugged into the "far" dc-pad probe. "Near" and "far" are terms that will be used many times, and refer to the dc-pad nearest to the sensor's bias resistor, and the dc-pad furthest from the bias resistor. More on this later. By my convention, "1" is always plugged into the left probe, and "2" into the right probe (see figure [TODO: picture-setup] again).
+                
+                %differential probes
+                The reason for these voltage dividers is to protect the Tektronix differential probes. The differential probes are only rated to 25 volts, while the sensor's dc pads can output several hundred volts. The differential probes need to be plugged into the voltage dividers on one end, and into the Tektronix TDS 5054 Oscilloscope (CH1 and CH2) on the other. The settings for both differential probes should be set as shown in figure [TODO: figure-diff probes settings]. That is, "DC reject" should be set to off, "bandwidth" should be set to 200 MHz, and "attenuation" should be set to "divide by 10".
+
+            %touch down on sensor pads, aim laser, turn laser on
+            \subsection{ Readying the Test Sensor }
+
+            %FIRE ZEE LAZER!!! (every 3 s. max...). Filter out double peaks. Watch for damage
+            \subsection{ Laser and Oscilloscope Operation }
+
+            %python!!!
+            \subsection{ Post-Experiment Analysis }
 
 
 
