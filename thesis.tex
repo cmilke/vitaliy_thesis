@@ -92,7 +92,8 @@
     \newpage \vspace*{\fill}
         \addcontentsline{toc}{chapter}{Dedication}
         \begin{center} \begin{large}
-            TODO: dedication
+            Dedicated to all of the brave sensors\\
+            who gave their lives in the name of science.
         \end{large} \end{center}
     \vspace*{\fill} \newpage \vspace*{\fill}
         \addcontentsline{toc}{chapter}{Acknowledgements}
@@ -109,6 +110,8 @@
 
 
     \chapter{ Background }
+        \pagenumbering{arabic} \setcounter{page}{1}
+        TODO: Background
 
 
 
@@ -139,7 +142,6 @@
                 %Laser filter
                 The last step before getting a sensor is making sure the laser is ready. Find the neutral density filter cylinder (figure [TODO: figure-filter holster]) and make sure the filter you intend to use has been placed in the cylinder and rotated into position in front of the laser beam. Be very careful to make sure you are using one of the more powerful filters, as using the weaker filters will result in damage to the sensor (see section [TODO: section-laser filter labels/which are good or bad]). Locate the the laser power box, insert the safety key, and arm the laser. Do not turn the laser on yet. It is now time to get the sensor ready.
 
-
             %touch down on sensor pads, aim laser, turn laser on
             \subsection{ Readying the Test Sensor }
                 %place sensor, touch down
@@ -151,7 +153,7 @@
             %FIRE ZEE LAZER!!! (every 3 s. max...). Filter out double peaks. Watch for damage
             \subsection{ FIRE ZE LAZER!!! (carefully): \\ Laser and Oscilloscope Operation }
                 %warning
-                Before we go any further, I should make something clear: You are testing a very fragile and sensitive piece of electronic equipement that can be damaged with a misdirected flashlight. You are about to shoot directly at it with a laser \textit{that can cut through metal}. In my time doing these tests I have amassed an entire graveyard of sensors which were damaged or destroyed because of this laser. I cannot stress enough how important it is to be careful and patient with this part of the experiment. Negligence \textit{will} result in your sensor being rendered untestable at best, and outright destroyed via laser ablation at worst (figure [TODO: example of what happens when you aren't careful]).
+                Before we go any further, I should make something clear: You are testing a very fragile and sensitive piece of electronic equipement that can be damaged with a misdirected flashlight. You are about to shoot directly at it with a laser \textit{that can make craters in metal}. In my time doing these tests I have amassed an entire graveyard of sensors which were damaged or destroyed because of this laser. I cannot stress enough how important it is to be careful and patient with this part of the experiment. Negligence \textit{will} result in your sensor being rendered untestable at best, and outright destroyed via laser ablation at worst (figure [TODO: example of what happens when you aren't careful]).
 
                 %turning on the laser
                 With that out of the way, the first thing to do is to turn on the sensor power supply. Assuming you wired everything up correctly, you want to bias the sensor with negative voltage. I've found that the best place to start is by biasing to -50 volts, as the laser is less likely to damage the sensor at this voltage. Once you've assured yourself that you have a solid bias connection, it is time to turn on the Alessi Power Supply. As of writing this thesis, you will want to set the laser power 511. As mentioned in section [TODO: section-laser issues], the laser power that we can operate at does not seem to be consistent, and you may need to use a different value. The important thing is to not go too high. Using too large a value here is guaranteed to break the sensor.
@@ -170,7 +172,15 @@
 
             %python!!!
             \subsection{ Post-Experiment Analysis }
+                %initial sweep: smooth data, remove offset
+                The post-processing of the data for this experiment is fairly starghtfoward, and ultimately amounts to plotting the peak voltages of the various measurements against the bias voltage those measurements were taken at. There are a couple of caveats to obtaining this value however. The first step in this process is to smooth out the data and set a proper baseline. Smoothing the data out is a straightforward process that simply uses a running mean to make the data less erratic. As for the baseline, the voltage going through the probes/differential probes/oscilloscope tends to be very slightly offset from zero. As such we need to shift all the data points slightly to get the proper relative values. This is done by \textbf{assuming} that the first several data points (my algorithm uses the first 5\%) are flat, with no pulse data. When configuring the oscilloscope, you should ensure that the trigger point is not too far to the left, so that this assumption remains true.
+                
 
+                %remove inductance spike, find laser pulse
+                Once the data is smoothed out and corrected for the dc offset, the next step is to sort through the measurement data from a pulse and locate the actual spike. Due to the way the experiment is setup, firing the laser causes inductance in the oscilloscope probes, leading to a very sharp spike being captured by the oscilloscope, as seen in figure [TODO:inductance spike]. In fact, in the majority of cases, this inductance spike is what the oscilloscope triggers off of. In order to avoid confusing the analysis, this inductance spike is removed. Fortunately, this is a simple matter, because while the pulse caused by the laser is purely negative, the inductance spike is both negative and positive. With the data now appropriately cleaned up, the laser pulse can be easily identified by simply being the most negative voltage of the data.
+
+                %laser peak clipping
+                Finding the laser peak is not quite the end though. Due to another quirk of the setup (again, possibly because of inductance...), the peak that appears on the oscilloscope is higher than the actual maximum voltage going through the strip of the sensor. It was found in previous studies that this additional perceived voltage is related to the rise time of the laser pulse; the shorter the rise time, the higher the pulse. Calibrations were performed to accurately measure this dependence. We use the data from those calibrations in combination with the rise time of the laser pulse in order to determine how distorted the laser pulse tip is. Finally, the laser pulse is then trimmed down by an appropriate amount, and the finished peak data can be used for further study.
 
 
 
