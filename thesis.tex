@@ -217,7 +217,7 @@
             Two sensors were tested using a two tissue setup: ATLAS12A BZ3F W[FIXME]-P2 and ATLAS12A BZ3F W[FIXME]-P3. The data for P3 is shown in figure [TODO: plots
             %150914_atlas12a_bz3f-p03 ; check the ignore folder for pics TODO: also check the strip 25 test to see what happened.
             ]. While the sensor was able to tolerate testing up to -400 volt bias, the results are completely useless. The test on the P2 sensor was not recorded, but merely used to confirm that the behaviour seen in the P3 sensor was not because of a defect in the sensor. The P2 sensor was capable of tolerating laser shots up to -700 volts, but peak voltages stopped increasing beyond a bias voltage of only -5 V, whereupon it displayed the same behaviour as the P3 sensor. My hypothesis is that the tissue paper attenuates the laser to such a high degree that only a tiny amount of light is able to reach the sensor to induce charge in the strip. This current is so small, that all of the charge is able to be picked up when the sensor is biased to only 5-10 V. As a result, I do not believe that the use of tissue paper (at least with this procedure) is a viable way to perform laser injection tests.
-            
+
             
 
         \section{Peltier Cooling}
@@ -228,17 +228,22 @@
             With these tests unsucessful, I decided to do another test using cooling well below room temperature. I cooled the sensor to just around 0$^\circ$ C, and tested the ATLAS12A BZ3C W757-P2 sensor. This may have been the single most sucessful test I performed, obtaining data (figure [TODO: plot
             %151008_atlas12a_bz3c-p2_w757 
             ]) all the way to a bias voltage -500 V with the laser pointed by the far dc pad. Unfortunately, while collecting the data at -500 V, the sensor failed catastrophically. Figure [TODO: pic of the crate left on the bias ring] shows the damage done on the bias ring from the final voltage discharge. Note that this is on the bias ring, not the strip, and was not caused by the laser directly. The crater was directly under the bias probe tip, indicating a large electrical discharge between the two. I had been having a number of issues maintaining contact between the probe tip and the bias ring, and this may have merely been a short, and not a consequence of the laser. Moreover, until the moment it failed, I had seen absolutely no damage peaks on the oscilloscope. The only noteworthy element of the test which could have been warning a sign is that at the very highest bias voltages, I began noticing an unusually high number of small (|< 10 V|) peaks on the oscilloscope. I am unsure as to the relation, if any, between this and the failure of the sensor. As for the data itself, it is slightly concerning how low the peak voltage is when it reaches the platue stage. However, this may have just been a result of the low temperatures. What is much more important though is that the peak voltages do platue, and the PTP structure's activation is quite visible. Given the relative success of this method compared to almost every other laser injection method I attempted, I would recommend looking into this method again. Of course I make this conclusion only in hindsight, and at the time did not give this method any more merit than the others, due to the difficulty of cold testing and the ultimate failure of the sensor. As such, I continued on with other methods.
-            
-            
-            
-        \section{Lower Magnification}
-            TODO!
 
-        \section{Strip Disconnection}
-            TODO!
+
+            
+        \section{Low R Sensors}
+            This is a brief section, but should nonetheless be addressed. After all the tests on the ATLAS12 sensors, I was advised to test a different kind of sensor, known as a LowR sensor, which also possesses a ptp structure. The results for these tests are displayed in figure [TODO:
+            %151015_lowR_batch6958_w03_1m_d18_p06_s06-s1b
+            ]. These tests were done using the standard procedure, and faced the same problems as the ATLAS07 BZ4 and ATLAS12 sensors. That is, I encountered damage spikes and was forced to abondon testing before I reached bias voltages that would reveal the ptp structure fully.
+
+
 
         \section{More Powerful Filter} \label{sect:new_filters}
-            TODO!
+            The final test that I did was to use a couples more powerful neutral density filters. First, I attempted to use the NENIR513B neutral density filter. I did not take data though, as a brief test with an ATLAS04 BZ4A sensor showed the typical damage peaks around the 200 V bias voltage mark. A full test to the necessary bias voltages would have almost certainly resulted in the sensor being damaged.  
+
+            With the 513B not powerful enough, I moved onto a more powerful filter. Specifically, I used the NENIR520B filter with the ATLAS07 BZ4A W190-P4 and ATLAS07 BZ3 W51-P6 sensors. Their results are shown in figures [TODO:
+            %160527_atlas07_w190_bz4a-p4  and  160601_atlas07_w51_bz3-p6
+            ]. The sensors were in fact able to survive up to -250 volts, high enough that ptp effects should be visible in the BZ4A. Unfortunately, the high powered filter appears to be having an effect not unlike that of the tissue paper. The peak voltages platue much earlier than they should, and the variance of the peak voltages becomes enourmous. Thus, it would seem, that the 513B is not powerful enough to protect the sensor, but the 520B is so powerful the it renders the results of any tests with it useless.
 
 
 
