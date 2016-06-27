@@ -112,6 +112,7 @@
     \chapter{ Background }
         \pagenumbering{arabic} \setcounter{page}{1}
         TODO: Background
+        TODO: You might want to squeeze the charge collection results in here and compare them to CParker's.
 
 
 
@@ -181,6 +182,8 @@
             %laser peak clipping
             Finding the laser peak is not quite the end though. Due to another quirk of the setup (again, possibly because of inductance...), the peak that appears on the oscilloscope is higher than the actual maximum voltage going through the strip of the sensor. It was found in previous studies that this additional perceived voltage is related to the rise time of the laser pulse; the shorter the rise time, the higher the pulse. Calibrations were performed to accurately measure this dependence. We use the data from those calibrations in combination with the rise time of the laser pulse in order to determine how distorted the laser pulse tip is. Finally, the laser pulse is then trimmed down by an appropriate amount, and the finished peak data can be used for further study.
 
+            
+
 
 
     \chapter{ What I Have Previously (Unsucessfully) Tried\\ AKA: What Not To Do }
@@ -247,6 +250,8 @@
 
 
 
+
+
     \chapter{Appendices}
         \section{Qualitative Neutral Density Filter Strength Tests} \label{sect:filter_tests}
             TODO! refer back to page \pageref{page:504_to_black_filter}.
@@ -255,7 +260,16 @@
             TODO!
 
         \section{PTP Structure Study} \label{sect:ptp_study}
-            TODO!
+            One of the many extra tests I did was to test the PTP structure's resistance at varying distances from a strip, before and after the strip underwent laser injection testing. What this provided was a quantitative comparison of the range of damage that laser injection has. Before I explain the results, allow to briefly go over the setup. A sensor is placed onto the chuck, and a total of five probe tips are touched down onto it. One strip is designated as the target strip. Two of the five probes are placed down onto the target strip, one on the dc pad nearest the bias resistor, the other on the dc pad furthest from the bias resistor. One additional probe is placed on each of the strips immediately adjacent to the target strip, both of the them on the dc pad nearest their respective bias resistor. The fifth and final probe is touched down on the bias ring. The bias ring probe is merely connected to the ground of a high voltage power supply. The other four are all connected to a parameter analyzer. The one probe at the far dc pad is held at ground by the parameter analyzer. The remaining three probes are held at the same voltage $x$, where $x$ will vary as a function of time. This setup is illustrated in figure [TODO: make a diagram of this because it's complicated]. The reason for the three probes being held at the same voltage is to ensure that the current through the target strip has no reason to pass to the adjacent strips; the current can only flow to ground through the bias resistor or PTP structure.
+
+            The target current through the dc pad of the target strip is measured as a function of voltage (from about 0 volts to -50 volts) while the bias voltage is held at 200 volts \footnote{This is for an ATLAS07 BZ4A. The bias voltage should be whatever the PTP activation voltage is for the sensor being tested}. By taking the discrete derivative of the resulting IV curve, you can obtain the resistance of the strip as a function of voltage. I produced a number of these RV plots for a number of strips on one sensor, at increasing distance from the original target strip. I then performed a laser injection test on the strip and redid all the RV plots for the same strips. Figures [TODO: a ton of figures, all in 
+            %/home/cmilke/ATLAS/data/ptp/151221_atlas07_bz3/images/resistance/individual_strips
+            ] show all the strip resistances before and after laser testing, with strip 80 being the one that was shot with a laser. There is a very distinguished difference between the before and after plots, all the way out to about ten strips away. This difference is illustrated more clearly in figures [TODO:
+            %/home/cmilke/ATLAS/data/ptp/151221_atlas07_bz3/images/resistance/comparison
+            ], where the difference between the strip resistances before and after laser injection is plotted as a function of the voltage. Note that, while the laser injection test used for these plots persisted until the leakage current of the sensor jumped, a leakage current jump is not required to see this kind of damage on a strip. Another sensor, whose leakage current was intact, was also tested and showed similar RV behaviour at the laser targetted strip.
+
+            The main purpose of this test was to determine the range of damage of laser injection testing on a sensor. However, a brief, but informative, additional test was done to determine where the damage in the strip actually was. The test consisted of putting voltage on the near dc pad of a laser injected strip, and measuring the voltage at the far dc pad. The test was then reversed, putting voltage on the the far dc pad and measuring the voltage on the near dc pad. By comparing the voltages, it was determined that something between the near dc pad and the bias ring had been damaged, and the resistance between the two had dropped. Likely, this was the PTP structure (as other tests showed that the bias resistor was still intact). It is possible that, in other laser injection tests, it would be the PTP structure on the far side of the strip which would fail instead, though I never did tests to confirm this.
+            
 
 
 
