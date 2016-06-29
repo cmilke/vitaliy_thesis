@@ -104,7 +104,7 @@
         \begin{center} \begin{large}
             \large \textbf{Acknowledgements} \vspace{\baselineskip}
 
-            I would like to give a big thanks to Vitaliy Fadeyev and Zachary Galloway, both of whom were immensly helpful in providing advice, guidance, and technical support during my time doing research at SCIPP. Without their help, I would not have been able to perform, or even thought of, anywhere near as many experiments as I did.
+            I would like to give a big thanks to Vitaliy Fadeyev and Zachary Galloway, both of whom were immensly helpful in providing advice, guidance, and technical support during my time doing research at SCIPP. Without their help, I would not have been able to perform, or even think of, anywhere near as many experiments as I did.
 
         \end{large} \end{center}
     \vspace*{\fill} \newpage
@@ -147,7 +147,7 @@
 
 
             %intro
-            The next (and most important) step to performing laser injection testing is making sure you use the probe station that is equipped with the Alessi Cutting Laser, visible in figure \ref{laser_02}. Then you need to set up the circuit. Three probes are needed for the laser injection test. The convention I've used is a probe on each side at the back of the probe platform, with the third probe on the right towards the front of the platform, as visible in figure \ref{fig:probe_tips_00}.
+            The next (and most important) step to performing laser injection testing is making sure you use the probe station that is equipped with the Alessi Cutting Laser, visible in figure \ref{fig:laser_02}. Then you need to set up the circuit. Three probes are needed for the laser injection test. The convention I've used is a probe on each side at the back of the probe platform, with the third probe on the right towards the front of the platform, as visible in figure \ref{fig:probe_tips_00}.
 
             \begin{figure}[h] 
                 \includegraphics[height=.4\textheight]{laser_02}
@@ -209,7 +209,7 @@
         %touch down on sensor pads, aim laser, turn laser on
         \section{ Readying the Test Sensor }
             %place sensor, touch down
-            Place the test sensor onto the chuck. By my convention, I always make sure that the bias resistors, visible in figure \ref{sensor_near}, are on the left. Time to touch down. Pick a strip number. The "near" probe should touch down onto the dc-pad nearest the bias resistor on that strip, and the "far" probe should touch down on the dc-pad furthest from the bias resistor on that strip. The bias probe should of course touch down on the bias ring.
+            Place the test sensor onto the chuck. By my convention, I always make sure that the bias resistors, visible in figure \ref{fig:sensor_near}, are on the left. Time to touch down. Pick a strip number. The "near" probe should touch down onto the dc-pad nearest the bias resistor on that strip, and the "far" probe should touch down on the dc-pad furthest from the bias resistor on that strip. The bias probe should of course touch down on the bias ring.
 
             \begin{figure}[h] 
                 \includegraphics[height=.4\textheight]{monitor}
@@ -219,7 +219,7 @@
             \end{figure}
 
             %aim ze lazer
-            The last step before you can start testing is to aim the laser. This must be done using the high (APO SL50) magnification lens, but \textit{not} using the extra 2X magnification. There are two locations we typically aim the laser at, near the bias resistor and far away from the bias resistor. Figures \ref{sensor_near}, \ref{sensor_far}, and \ref{monitor} show exactly where I usually aim the laser. Precise aiming of the laser is accomplished using the CRT microscope viewing monitor. There are two pairs of tape on the screen, which act as crosshairs. One pair is for when the microscope is at 1X magnification, the second pair for 2X magnification (only used when you intend to actually cut things). With the laser aimed, turn off the viewing light and close up the probe station (the light will break the sensor when biased, and the laser will not operate with the station open).
+            The last step before you can start testing is to aim the laser. This must be done using the high (APO SL50) magnification lens, but \textit{not} using the extra 2X magnification. There are two locations we typically aim the laser at, near the bias resistor and far away from the bias resistor. Figures \ref{fig:sensor_near}, \ref{fig:sensor_far}, and \ref{fig:monitor} show exactly where I usually aim the laser. Precise aiming of the laser is accomplished using the CRT microscope viewing monitor. There are two pairs of tape on the screen, which act as crosshairs. One pair is for when the microscope is at 1X magnification, the second pair for 2X magnification (only used when you intend to actually cut things). With the laser aimed, turn off the viewing light and close up the probe station (the light will break the sensor when biased, and the laser will not operate with the station open).
 
         %FIRE ZEE LAZER!!! (every 3 s. max...). Filter out double peaks. Watch for damage
         \section{ FIRE ZE LAZER!!! (carefully): \\ Laser and Oscilloscope Operation }
@@ -236,14 +236,42 @@
             %turning on the laser
             With that out of the way, the first thing to do is to turn on the sensor power supply. Assuming you wired everything up correctly, you want to bias the sensor with negative voltage. I've found that the best place to start is by biasing to -50 volts, as the laser is less likely to damage the sensor at this voltage. Once you've assured yourself that you have a solid bias connection, it is time to turn on the Alessi Power Supply. As of writing this thesis, you will want to set the laser power to 511. As mentioned in section \ref{sect:mystery}, the laser power that we can operate at does not seem to be consistent, and you may need to use a different value. The important thing is to not go too high. Using too large a value here is guaranteed to break the sensor.
 
+            \begin{figure}[h] 
+                \includegraphics[height=.4\textheight]{50V_spike}
+                \centering
+                \caption{ A typical example of the raw output of a laser induced voltage spike, using a 50 volt bias. }
+                \label{fig:50V_spike}
+            \end{figure}
+
             %initial test fire
-            With the laser power set, you can now finally fire the laser... every 3-5 seconds. For the safety of both the laser and the sensor, you are prohibited from firing the laser any more than once every three seconds. Because I like to be especially cautious, I always prefer to fire only every five seconds. The laser can be triggered with the trigger switch on the laser power supply or, more conveniently, with the attached foot peddle. Fire the laser and watch the oscilloscope. If you are lucky, you should see a sudden spike (or pair of spikes) like in figure [TODO: figure-example 50V spike]. However, the Alessi laser is nothing if not inconsistent, which mean you may have to fire the laser several times (once every 3-5 seconds...) before you see such a spike. It is not unusual to have to wait up to 20 shots before seeing a spike. If you do not see a spike after that many laser triggerings though, you should check your probes' connections to the dc pads.
+            With the laser power set, you can now finally fire the laser... every 3-5 seconds. For the safety of both the laser and the sensor, you are prohibited from firing the laser any more than once every three seconds. Because I like to be especially cautious, I always prefer to fire only every five seconds. The laser can be triggered with the trigger switch on the laser power supply or, more conveniently, with the attached foot peddle. Fire the laser and watch the oscilloscope. If you are lucky, you should see a sudden spike (or pair of spikes) like in figure \ref{fig:50V_spike}. However, the Alessi laser is nothing if not inconsistent, which mean you may have to fire the laser several times (once every 3-5 seconds...) before you see such a spike. It is not unusual to have to wait up to 20 shots before seeing a spike. If you do not see a spike after that many laser triggerings though, you should check your probes' connections to the dc pads.
+
+            \begin{figure}[h] 
+                \includegraphics[height=.4\textheight]{double_peak}
+                \centering
+                \caption{ A typical double spike, resulting from the laser firing two pulses in short succession. They are not harmful to the sensor, but you cannot use the data from them. }
+                \label{fig:double_peak}
+            \end{figure}
 
             %what to watch for
-            Upon seeing a pulse and confirming that your oscilloscope probes are properly touched down, you can begin recording data. Fire the laser as many times as you need, at whatever bias voltages you need. While doing so however, pay very close to attention to both the shape of the spikes you see, and the leakage current running through the sensor (visible on the power supply). There are two things that can go wrong with the spike shape. The first is that you can get a "double peak", as visible in figure [TODO: figure-double peak]. A double peak (and at high enough laser powers a triple peak) like this indicates that the laser fired twice in a very short period of time. As our experiments are always concerned with only single pulse spikes, you need to throw away these double peak pulses. 
+            Upon seeing a pulse and confirming that your oscilloscope probes are properly touched down, you can begin recording data. Fire the laser as many times as you need, at whatever bias voltages you need. While doing so however, pay very close to attention to both the shape of the spikes you see, and the leakage current running through the sensor (visible on the power supply). There are two things that can go wrong with the spike shape. The first is that you can get a "double peak", as visible in figure \ref{fig:double_peak}. A double peak (and at high enough laser powers a triple peak) like this indicates that the laser fired twice in a very short period of time. As our experiments are always concerned with only single pulse spikes, you need to throw away these double peak pulses. 
+
+            \begin{figure}[h] 
+                \includegraphics[height=.4\textheight]{damage_spike}
+                \centering
+                \caption{ A typical damage spike. Note the distinctive vertical line immediately preceding the more normal looking voltage spike. }
+                \label{fig:damage_spike}
+            \end{figure}
+
+            \begin{figure}[h] 
+                \includegraphics[height=.4\textheight]{damage_spike_zoom}
+                \centering
+                \caption{ A typical damage spike, a bit zoomed. At this scale, the telltale vertical line resolves into a very sharp negative peak, before rising into a positive peak, and then regularizing to a more normal voltage spike. The positive aspect of the spike is the most noteable, as a negative reverse biased sensor should never output positive votage. }
+                \label{fig:damage_spike_zoom}
+            \end{figure}
             
             %marks of death
-            The second pulse shape to watch for, which I refer to as a damage spike, is much more concerning. They come in two forms, visible in figures [TODO: figure-damage spikes(sharp up, rounded)]. An occurance of one of these indicates that you are beginning to damage the strip you are shooting at. As was discussed in section [TODO: section-ptp tests], this damage is permanent, but is limited almost entirely to that strip. If you see a damage spike, STOP. You are officially playing russian roulette with the sensor, and any laser shot from this point on risks globally damaging the sensor. With that said, the issue of global sensor damage leads us to the second aspect you need to pay attention to while testing sensors: the leakage current.
+            The second pulse shape to watch for, which I refer to as a damage spike (figures \ref{fig:damage_spike} and \ref{fig:damage_spike_zoom}, is much more concerning. An occurance of one of these indicates that you are beginning to damage the strip you are shooting at. Note, that this damage is permanent, but is limited to that strip and its neighbor strips (see appendix \ref{sect:ptp_study} for more detail). If you see a damage spike, STOP. You are officially playing russian roulette with the sensor, and any laser shot from this point on risks globally damaging the sensor. With that said, the issue of global sensor damage leads us to the second aspect you need to pay attention to while testing sensors: the leakage current.
 
             %leakage current
             After every pulse of the laser, take a glance at the leakage current through the sensor. If, upon triggering the laser, the leakage current suddenly jumps up several orders of magnitude, STOP. The sensor has been globally damaged. Technically the sensor is still usable, but I would strongly recommend that you no longer use it for laser injection testing. Firing the laser at such a sensor will only cause the leakage current to rise higher, eventually maxing out the power supply's maximum compliance rating and rendering the sensor completely unusable. Assuming that you manage to skirt disaster though, and are able to export your data, we need to look at some post-processing.
@@ -252,10 +280,16 @@
         \section{ Post-Experiment Analysis }
             %initial sweep: smooth data, remove offset
             The post-processing of the data for this experiment is fairly starghtfoward, and ultimately amounts to plotting the peak voltages of the various measurements against the bias voltage those measurements were taken at. There are a couple of caveats to obtaining this value however. The first step in this process is to smooth out the data and set a proper baseline. Smoothing the data out is a straightforward process that simply uses a running mean to make the data less erratic. As for the baseline, the voltage going through the probes/differential probes/oscilloscope tends to be very slightly offset from zero. As such we need to shift all the data points slightly to get the proper relative values. This is done by \textbf{assuming} that the first several data points (my algorithm uses the first 5\%) are flat, with no pulse data. When configuring the oscilloscope, you should ensure that the trigger point is not too far to the left, so that this assumption remains true.
-            
+
+            \begin{figure}[h] 
+                \includegraphics[height=.4\textheight]{inductance_peak}
+                \centering
+                \caption{ A small inductance spike at the tip of a standard voltage spike. These are unavoidable with the current setup, and so must be removed while processing the data. }
+                \label{fig:inductance_peak}
+            \end{figure}
 
             %remove inductance spike, find laser pulse
-            Once the data is smoothed out and corrected for the dc offset, the next step is to sort through the measurement data from a pulse and locate the actual spike. Due to the way the experiment is setup, firing the laser causes inductance in the oscilloscope probes, leading to a very sharp spike being captured by the oscilloscope, as seen in figure [TODO:inductance spike]. In fact, in the majority of cases, this inductance spike is what the oscilloscope triggers off of. In order to avoid confusing the analysis, this inductance spike is removed. Fortunately, this is a simple matter, because while the pulse caused by the laser is purely negative, the inductance spike is both negative and positive. With the data now appropriately cleaned up, the laser pulse can be easily identified by simply being the most negative voltage of the data.
+            Once the data is smoothed out and corrected for the dc offset, the next step is to sort through the measurement data from a pulse and locate the actual spike. Due to the way the experiment is setup, firing the laser causes inductance in the oscilloscope probes, leading to a small but sharp spike being captured by the oscilloscope seen in figure \ref{fig:inductance_peak}. In fact, in the majority of cases, this inductance spike is what the oscilloscope triggers off of. In order to avoid confusing the analysis, this inductance spike is removed. Fortunately, this is a simple matter, because while the pulse caused by the laser is purely negative, the inductance spike is both negative and positive. With the data now appropriately cleaned up, the laser pulse can be easily identified by simply being the most negative voltage of the data.
 
             %laser peak clipping
             Finding the laser peak is not quite the end though. Due to another quirk of the setup (again, possibly because of inductance...), the peak that appears on the oscilloscope is higher than the actual maximum voltage going through the strip of the sensor. It was found in previous studies that this additional perceived voltage is related to the rise time of the laser pulse; the shorter the rise time, the higher the pulse. Calibrations were performed to accurately measure this dependence. We use the data from those calibrations in combination with the rise time of the laser pulse in order to determine how distorted the laser pulse tip is. Finally, the laser pulse is then trimmed down by an appropriate amount, and the finished peak data can be used for further study.
