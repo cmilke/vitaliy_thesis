@@ -7,9 +7,11 @@
 \usepackage{graphicx}
 \usepackage{float}
 \usepackage{hyperref}
+\usepackage[section]{placeins}
 \usepackage[toc,page]{appendix}
 \usepackage[margin=1in]{geometry}
 \usepackage[doublespacing]{setspace}
+\usepackage[font=scriptsize]{caption}
 
 
 
@@ -102,7 +104,7 @@
         \begin{center} \begin{large}
             \large \textbf{Acknowledgements} \vspace{\baselineskip}
 
-            TODO: acknowledgments
+            I would like to give a big thanks to Vitaliy Fadeyev and Zachary Galloway, both of whom were immensly helpful in providing advice, guidance, and technical support during my time doing research at SCIPP. Without their help, I would not have been able to perform, or even thought of, anywhere near as many experiments as I did.
 
         \end{large} \end{center}
     \vspace*{\fill} \newpage
@@ -115,7 +117,7 @@
     \chapter{ Background }
         Sometime after the year 2022, the Large Hadron Collider (LHC) is planned to undergo a massive upgrade to its particle beam. This upgrade, called the High Luminosity LHC, or HL-LHC for short, will ramp the beam luminosity up tenfold, providing a variety of exciting new experimental possibilities, but also presenting a number of potential problems for the sensitive detection equipment surrounding the particle beam. This report focusses on a protype sensor technology that could help to mitigate one of these problems. More specifically, this report focusses on how to perform experiments on and test this prototype technology, or rather, how \textit{not} to test it. Now, what are we testing, and why?
             
-        One of the two biggest detectors around the LHC is the ATLAS detector, and in the middle of ATLAS is the Vertex Tracker subsystem. The Vertex Tracker is placed very close to the LHC's beam line, and as such is particularly vulnarable to an incident known as beam misalignment. Ideally, the beams of the LHC will always go straight down their respective beampipes, and all that will hit the Vertex Tracker is the myriads of scattered particles resulting from the beam collisions. If a beam becomes misaligned though, it can shoot directly into the Vertex Tracker, damaging not only the sensors, but also sending dangerously high currents through to the sensitive (and very expensive) readout equipment attached to the sensors. As such, a special type of sensors are in developement to protect the readout electronics. What makes these sensors special is the Punch Through Protection (PTP) structure. The idea is that, if extremely high voltages pass across through a strip on a PTP equipped sensor, then this PTP structure will activate, redirecting the charge on the strip to ground, instead of to the readout electronics. I should add that the term "activate", and in fact even the term "structure" are perhaps a bit advanced for what the PTP structure is and does. In reality, it is no more than the gap between the sensor strip and the bias ring. PTP sensors have a much smaller gap than most [TODO: maybe put a picture here... if you do, add a bibliography] sensors, so if the voltage on a strip is too high, it is able to simply jump this gap, shorting the sensor. This sensor shorting between strip and bias ring is the "activation" of the PTP structure.
+        One of the two biggest detectors around the LHC is the ATLAS detector, and in the middle of ATLAS is the Vertex Tracker subsystem. The Vertex Tracker is placed very close to the LHC's beam line, and as such is particularly vulnarable to an incident known as beam misalignment. Ideally, the beams of the LHC will always go straight down their respective beampipes, and all that will hit the Vertex Tracker is the myriads of scattered particles resulting from the beam collisions. If a beam becomes misaligned though, it can shoot directly into the Vertex Tracker, damaging not only the sensors, but also sending dangerously high currents through to the sensitive (and very expensive) readout equipment attached to the sensors. As such, a special type of sensors are in developement to protect the readout electronics. What makes these sensors special is the Punch Through Protection (PTP) structure. The idea is that, if extremely high voltages pass across through a strip on a PTP equipped sensor, then this PTP structure will activate, redirecting the charge on the strip to ground, instead of to the readout electronics. I should add that the term "activate", and in fact even the term "structure" are perhaps a bit advanced for what the PTP structure is and does. In reality, it is no more than the gap between the sensor strip and the bias ring. PTP sensors have a much smaller gap than most sensors, so if the voltage on a strip is too high, it is able to simply jump this gap, shorting the sensor. This sensor shorting between strip and bias ring is the "activation" of the PTP structure. For a much detailed description of PTP structures, see Colin Parker's Bachleour's Thesis (\cite{parker_thesis}) and Christopher Betancourt's Master's Thesis (\cite{betancourt_thesis}).
 
         What I have been doing for the past year is trying to test the effectiveness of the PTP structure in a variety of sensors. We simulate a beam misalignment by shooting the sensor with an infared laser, a process we call laser injection testing. The current that would be output to the readout electronics is picked up on the strip's dc pads, showing how much of the current was redirected through the PTP structure to the bias ring, and thus how effective the PTP structure is. For more details on the experiment and on the PTP structure itself, I would recommend reading Collin Parkers undergraduate thesis and Chris Betancourt's master thesis. Unfortunately, there will be no discussion of PTP effectiveness in the remainder of this paper. I said I spent the past year \textit{trying} to test PTP effectiveness; I have not succeeded in this endevour. Every single PTP equipped sensor I have ever tested has, without fail, broken during laser injection testing, before any meaningful results could be obtained. This report is a chronology of my various attempts at performing laser injection testing, in the hope that those who perform this test in the future can learn from my mistakes and obtain meaningful results. 
 
@@ -127,41 +129,112 @@
         %setup circuit, put in laser filter
         \section{ Preperation }
             %oscilloscope setup
-            The first step to performing laser injection analysis is to turn on the Tektronix TDS 5054 Oscilloscope, as it takes a while to boot up. Once it is on and the oscilloscope screen is visible, make sure the settings are sane. The viewing window settings are visible in figure [TODO: figure-oscilloscope window]. Additionally, the appendices provide instructions on setting up the details of the oscilloscope (see section [TODO: section-oscilloscope instructions]).
+            The first step to performing laser injection analysis is to turn on the Tektronix TDS 5054 Oscilloscope, as it takes a while to boot up. Once it is on and the oscilloscope screen is visible, make sure the settings are sane. The oscilloscope hardware settings are visible in figure \ref{fig:oscilloscope_01}, with a clearer view of the screen settings in figure \ref{fig:oscilloscope_00}.
+
+            \begin{figure}[h] 
+                \includegraphics[height=.4\textheight]{oscilloscope_01}
+                \centering
+                \caption{ A view of the Textronix Oscilloscope, with everything set to operate for laser injection testing.}
+                \label{fig:oscilloscope_01}
+            \end{figure}
+
+            \begin{figure}[h] 
+                \includegraphics[height=.4\textheight]{oscilloscope_00}
+                \centering
+                \caption{ A view of the Textronix Oscilloscope viewing window, pointing out the various viewing and resolution settings that I have typically used. }
+                \label{fig:oscilloscope_00}
+            \end{figure}
+
 
             %intro
-            The next (and most important) step to performing laser injection testing is making sure you use the probe station that is equipped with the Alessi Cutting Laser, visible in figure [TODO: figure-wide angle shot of the laser in the station]. Then you need to set up the circuit. Three probes are needed for the laser injection test. The convention I've used is a probe on each side at the back of the probe platform, with the third probe on the right towards the front of the platform, as visible in figure [TODO: picture-setup].
+            The next (and most important) step to performing laser injection testing is making sure you use the probe station that is equipped with the Alessi Cutting Laser, visible in figure \ref{laser_02}. Then you need to set up the circuit. Three probes are needed for the laser injection test. The convention I've used is a probe on each side at the back of the probe platform, with the third probe on the right towards the front of the platform, as visible in figure \ref{fig:probe_tips_00}.
+
+            \begin{figure}[h] 
+                \includegraphics[height=.4\textheight]{laser_02}
+                \centering
+                \caption{ The Alessi LY1 infared cutting laser housed in the probing station. }
+                \label{fig:laser_02}
+            \end{figure}
+
+            \begin{figure}[h] 
+                \includegraphics[height=.4\textheight]{probe_tips_00}
+                \centering
+                \caption{ The standard laser injection setup, with three probes connected by a piece of copper wire. }
+                \label{fig:probe_tips_00}
+            \end{figure}
 
             %power supply circuit
             The probe at the front of the platform (the "bias probe", as it will be used to bias the sensor) should have a standard coaxial cable connecting it to the ground terminal of the splitter box. The high voltage ouput of the splitter should be connected to the probe station chuck. And the Triaxial input to the splitter should be attached to a power supply capable of ouputting a kilovolt. 
             
             %copper wire loop
-            The probe barrels of all three probes need to be attached to each other with small pieces of copper wire and aligator clips. The reason for this is to ensure that everything is properly grounded. If you fail to do this, data you receive on the oscilloscope with be useless (see figure [TODO: figure-side by side comparison of grounded to floating]). Additionally, you want to make sure that the copper wire loop is as small as possible. The loop acts like an inductor that introduces unwanted noise to the system. Minimizing the size of the loop reduces noise it produces. See figure [TODO: figure-side by side comparison of good copper loop to bad copper loop] for an example of how this should look.
+            The probe barrels of all three probes need to be attached to each other with small pieces of copper wire and aligator clips. The reason for this is to ensure that everything is properly grounded. If you fail to do this, data you receive on the oscilloscope will likely be skewed in some fashion. Additionally, you want to make sure that the copper wire loop is as small as possible. The loop acts like an inductor that introduces unwanted noise to the system. Minimizing the size of the loop reduces noise it produces.
 
             %voltage dividers
-            Two of the probes need special voltage dividers attached to them. By my convention, these are always the two probes at the back of the station (in general, they are the probes you intend to touch down on the dc pads). Unscrew the coaxial cables from the probe barrels, and attach the voltage dividers in their place. There are two voltage dividers, labelled "1" and "2". It \textit{does} matter which probe they are plugged into. The voltage divider labelled "1" should be plugged into the "near" dc-pad probe, and "2" should be plugged into the "far" dc-pad probe. "Near" and "far" are terms that will be used many times, and refer to the dc-pad nearest to the sensor's bias resistor, and the dc-pad furthest from the bias resistor. More on this in the next section. By my convention, "1" is always plugged into the left probe, and "2" into the right probe (see figure [TODO: picture-setup] again).
+            Two of the probes need special voltage dividers attached to them. By my convention, these are always the two probes at the back of the station (in general, they are the probes you intend to touch down on the dc pads). Unscrew the coaxial cables from the probe barrels, and attach the voltage dividers in their place. There are two voltage dividers, labelled "1" and "2". It \textit{does} matter which probe they are plugged into. The voltage divider labelled "1" should be plugged into the "near" dc-pad probe, and "2" should be plugged into the "far" dc-pad probe. "Near" and "far" are terms that will be used many times, and refer to the dc-pad nearest to the sensor's bias resistor, and the dc-pad furthest from the bias resistor. More on this in the next section. By my convention, "1" is always plugged into the left probe, and "2" into the right probe.
             
+            \begin{figure}[h] 
+                \includegraphics[height=.4\textheight]{diff_probe}
+                \centering
+                \caption{ A picture of the two differential probes. Note that their settings are the same and are set to, from top to bottom: DC REJECT = OFF; BANDWIDTH = 200MHz; and ATTENUATION = $\div$10. }
+                \label{fig:diff_probe}
+            \end{figure}
+
             %differential probes
-            The reason for these voltage dividers is to protect the Tektronix differential probes. The differential probes are only rated to 25 volts, while the sensor's dc pads can output several hundred volts. The differential probes need to be plugged into the voltage dividers on one end, and into the Tektronix TDS 5054 Oscilloscope (CH1 and CH2) on the other. The settings for both differential probes should be set as shown in figure [TODO: figure-diff probes settings]. That is, "DC reject" should be set to off, "bandwidth" should be set to 200 MHz, and "attenuation" should be set to "divide by 10".
+            The reason for these voltage dividers is to protect the Tektronix differential probes. The differential probes are only rated to 25 volts, while the sensor's dc pads can output several hundred volts. The differential probes need to be plugged into the voltage dividers on one end, and into the Tektronix TDS 5054 Oscilloscope (CH1 and CH2) on the other. The settings for both differential probes should be set as shown in figure \ref{fig:diff_probe}. That is, "DC reject" should be set to off, "bandwidth" should be set to 200 MHz, and "attenuation" should be set to "divide by 10".
+
+            \begin{figure}[h] 
+                \includegraphics[height=.4\textheight]{laser_00}
+                \centering
+                \caption{ A view of the oscilloscope filter cylinder from above. }
+                \label{fig:laser_00}
+            \end{figure}
 
             %Laser filter
-            The last step before getting a sensor is making sure the laser is ready. Find the neutral density filter cylinder (figure [TODO: figure-filter holster]) and make sure the filter you intend to use has been placed in the cylinder and rotated into position in front of the laser beam. Be very careful to make sure you are using one of the more powerful filters, as using the weaker filters will result in damage to the sensor (see section [TODO: section-laser filter labels/which are good or bad]). Locate the the laser power box, insert the safety key, and arm the laser. Do not turn the laser on yet. It is now time to get the sensor ready.
+            The last step before getting a sensor is making sure the laser is ready. Find the neutral density filter cylinder (figure \ref{fig:laser_00}) and make sure the filter you intend to use has been placed in the cylinder and rotated into position in front of the laser beam. Be very careful to make sure you are using one of the more powerful filters, as using the weaker filters will result in damage to the sensor. Locate the the laser power box, insert the safety key, and arm the laser. Do not turn the laser on yet. It is now time to get the sensor ready.
+
+            \begin{figure}[h] 
+                \includegraphics[width=\textwidth]{sensor_near}
+                \centering
+                \caption{ A view of the near side of an ATLAS07 BZ4A sensor, with key areas for laser injection experiments highlighted. }
+                \label{fig:sensor_near}
+            \end{figure}
+
+            \begin{figure}[h] 
+                \includegraphics[width=\textwidth]{sensor_far}
+                \centering
+                \caption{ A view of the far side of an ATLAS07 BZ4A sensor, with key areas for laser injection experiments highlighted. }
+                \label{fig:sensor_far}
+            \end{figure}
 
         %touch down on sensor pads, aim laser, turn laser on
         \section{ Readying the Test Sensor }
             %place sensor, touch down
-            Place the test sensor onto the chuck. By my convention, I always make sure that the bias resistors, visible in figures [TODO: figure-two different zoom levels of the bias resistors], are on the left. Time to touch down. Pick a strip number. The "near" probe should touch down onto the dc-pad nearest the bias resistor on that strip, and the "far" probe should touch down on the dc-pad furthest from the bias resistor on that strip. The bias probe should of course touch down on the bias ring. See figures [TODO: figure of the pobes touched down and of the dc pads].
+            Place the test sensor onto the chuck. By my convention, I always make sure that the bias resistors, visible in figure \ref{sensor_near}, are on the left. Time to touch down. Pick a strip number. The "near" probe should touch down onto the dc-pad nearest the bias resistor on that strip, and the "far" probe should touch down on the dc-pad furthest from the bias resistor on that strip. The bias probe should of course touch down on the bias ring.
+
+            \begin{figure}[h] 
+                \includegraphics[height=.4\textheight]{monitor}
+                \centering
+                \caption{ Picture of the viewing screen for the microscope. Two crosshairs are marked on the screen with tape, designating where the laser will fire at a specific magnification level (using the APO SL50 lens). }
+                \label{fig:monitor}
+            \end{figure}
 
             %aim ze lazer
-            The last step before you can start testing is to aim the laser. This must be done using the high ([TODO: info-find mag level]) magnification lens, but \textit{not} using the extra 2X magnification. There are two locations we typically aim the laser at, near the bias resistor and far away from the bias resistor. Figures [TODO: figure-laser aiming locations] show exactly where I usually aim the laser. Precise aiming of the laser is accomplished using the CRT microscope viewing monitor. There are two pairs of tape on the screen, which act as crosshairs. One pair is for when the microscope is at 1X magnification, the second pair for 2X magnification (only used when you intend to actually cut things). See figure [TODO: figure-microscope screen]. With the laser aimed, turn off the viewing light and close up the probe station (the light will break the sensor when biased, and the laser will not operate with the station open).
+            The last step before you can start testing is to aim the laser. This must be done using the high (APO SL50) magnification lens, but \textit{not} using the extra 2X magnification. There are two locations we typically aim the laser at, near the bias resistor and far away from the bias resistor. Figures \ref{sensor_near}, \ref{sensor_far}, and \ref{monitor} show exactly where I usually aim the laser. Precise aiming of the laser is accomplished using the CRT microscope viewing monitor. There are two pairs of tape on the screen, which act as crosshairs. One pair is for when the microscope is at 1X magnification, the second pair for 2X magnification (only used when you intend to actually cut things). With the laser aimed, turn off the viewing light and close up the probe station (the light will break the sensor when biased, and the laser will not operate with the station open).
 
         %FIRE ZEE LAZER!!! (every 3 s. max...). Filter out double peaks. Watch for damage
         \section{ FIRE ZE LAZER!!! (carefully): \\ Laser and Oscilloscope Operation }
             %warning
-            Before we go any further, I should make something clear: You are testing a very fragile and sensitive piece of electronic equipement that can be damaged with a misdirected flashlight. You are about to shoot directly at it with a laser \textit{that can make craters in metal}. In my time doing these tests I have amassed an entire graveyard of sensors which were damaged or destroyed because of this laser. I cannot stress enough how important it is to be careful and patient with this part of the experiment. Negligence \textit{will} result in your sensor being rendered untestable at best, and outright destroyed via laser ablation at worst (figure [TODO: example of what happens when you aren't careful]).
+            Before we go any further, I should make something clear: You are testing a very fragile and sensitive piece of electronic equipement that can be damaged with a misdirected flashlight. You are about to shoot directly at it with a laser \textit{that can make craters in metal}. In my time doing these tests I have amassed an entire graveyard of sensors which were damaged or destroyed because of this laser. I cannot stress enough how important it is to be careful and patient with this part of the experiment. Negligence \textit{will} result in your sensor being rendered untestable at best, and outright destroyed via laser ablation at worst (figure \ref{fig:crater}).
+
+            \begin{figure}[h] 
+                \includegraphics[height=.4\textheight]{crater}
+                \centering
+                \caption{ This is an ablation crater from a single shot of the laser at full power and no filter. Please do not do this to a working sensor. }
+                \label{fig:crater}
+            \end{figure}
 
             %turning on the laser
-            With that out of the way, the first thing to do is to turn on the sensor power supply. Assuming you wired everything up correctly, you want to bias the sensor with negative voltage. I've found that the best place to start is by biasing to -50 volts, as the laser is less likely to damage the sensor at this voltage. Once you've assured yourself that you have a solid bias connection, it is time to turn on the Alessi Power Supply. As of writing this thesis, you will want to set the laser power to 511. As mentioned in section [TODO: section-laser issues in Introduction], the laser power that we can operate at does not seem to be consistent, and you may need to use a different value. The important thing is to not go too high. Using too large a value here is guaranteed to break the sensor.
+            With that out of the way, the first thing to do is to turn on the sensor power supply. Assuming you wired everything up correctly, you want to bias the sensor with negative voltage. I've found that the best place to start is by biasing to -50 volts, as the laser is less likely to damage the sensor at this voltage. Once you've assured yourself that you have a solid bias connection, it is time to turn on the Alessi Power Supply. As of writing this thesis, you will want to set the laser power to 511. As mentioned in section \ref{sect:mystery}, the laser power that we can operate at does not seem to be consistent, and you may need to use a different value. The important thing is to not go too high. Using too large a value here is guaranteed to break the sensor.
 
             %initial test fire
             With the laser power set, you can now finally fire the laser... every 3-5 seconds. For the safety of both the laser and the sensor, you are prohibited from firing the laser any more than once every three seconds. Because I like to be especially cautious, I always prefer to fire only every five seconds. The laser can be triggered with the trigger switch on the laser power supply or, more conveniently, with the attached foot peddle. Fire the laser and watch the oscilloscope. If you are lucky, you should see a sudden spike (or pair of spikes) like in figure [TODO: figure-example 50V spike]. However, the Alessi laser is nothing if not inconsistent, which mean you may have to fire the laser several times (once every 3-5 seconds...) before you see such a spike. It is not unusual to have to wait up to 20 shots before seeing a spike. If you do not see a spike after that many laser triggerings though, you should check your probes' connections to the dc pads.
@@ -170,7 +243,7 @@
             Upon seeing a pulse and confirming that your oscilloscope probes are properly touched down, you can begin recording data. Fire the laser as many times as you need, at whatever bias voltages you need. While doing so however, pay very close to attention to both the shape of the spikes you see, and the leakage current running through the sensor (visible on the power supply). There are two things that can go wrong with the spike shape. The first is that you can get a "double peak", as visible in figure [TODO: figure-double peak]. A double peak (and at high enough laser powers a triple peak) like this indicates that the laser fired twice in a very short period of time. As our experiments are always concerned with only single pulse spikes, you need to throw away these double peak pulses. 
             
             %marks of death
-            The second pulse shape to watch for is much more concerning. I refer to them as damage spikes, or marks of death. They come in three forms, visible in figures [TODO: figure-damage spikes(sharp up, rounded, and tiny pulse)]. An occurance of one of these indicates that you are beginning to damage the strip you are shooting at. As was discussed in section [TODO: section-ptp tests], this damage is permanent, but is limited almost entirely to that strip. If you see a damage spike, STOP. You are officially playing russian roulette with the sensor, and any laser shot from that point on risks globally damaging the sensor. Which leads us to the second aspect you need to pay attention to while testing sensors: the leakage current.
+            The second pulse shape to watch for, which I refer to as a damage spike, is much more concerning. They come in two forms, visible in figures [TODO: figure-damage spikes(sharp up, rounded)]. An occurance of one of these indicates that you are beginning to damage the strip you are shooting at. As was discussed in section [TODO: section-ptp tests], this damage is permanent, but is limited almost entirely to that strip. If you see a damage spike, STOP. You are officially playing russian roulette with the sensor, and any laser shot from this point on risks globally damaging the sensor. With that said, the issue of global sensor damage leads us to the second aspect you need to pay attention to while testing sensors: the leakage current.
 
             %leakage current
             After every pulse of the laser, take a glance at the leakage current through the sensor. If, upon triggering the laser, the leakage current suddenly jumps up several orders of magnitude, STOP. The sensor has been globally damaged. Technically the sensor is still usable, but I would strongly recommend that you no longer use it for laser injection testing. Firing the laser at such a sensor will only cause the leakage current to rise higher, eventually maxing out the power supply's maximum compliance rating and rendering the sensor completely unusable. Assuming that you manage to skirt disaster though, and are able to export your data, we need to look at some post-processing.
@@ -280,9 +353,15 @@
 
 
 
-        \section{Charge Collection Mystery}
-            By far, the most confusing aspect of my year doing these tests is that, while I was thoroughly unable to perform laser injection testing without breaking sensors, a number of people that came before me \textit{have}. Both Collin Parker and Chris Betancourt succeeded in obtaining results from laser injection testing. They met quite a bit of difficulty in doing so, but it was at least possible. Parker's thesis provides a clue to this. In his thesis, figure 3.7 illustrates the charge collected on a number of sensors as a function of distance from the strip he fired the laser at. I have attempted to reproduce this plot using all the parameters he did. According to him, this plot was produced with a laser power of 515, on an ATLAS07 BZ3 sensor, without a neutral density filter. Without even getting results, it becomes apparent that something has changed between his tests and mine. This is because, when I performed a test with the laser at a power of only 511 without a filter, I made a small crater in the sensor. If 511 causes a crater, then 515 would be absolutely untestable. It would appear that the laser is behaving differently than it did before.
+        \section{Charge Collection Mystery} \label{sect:mystery}
+            By far, the most baffling aspect of my year doing these tests is that, while I was thoroughly unable to perform laser injection testing without breaking sensors, a number of people that came before me \textit{have}. Both Collin Parker and Chris Betancourt succeeded in obtaining results from laser injection testing. They met quite a bit of difficulty in doing so, but it was at least possible. Parker's thesis provides a clue to this. In his thesis, figure 3.7 illustrates the charge collected on a number of sensors as a function of distance from the strip he fired the laser at. I have attempted to reproduce this plot using all the parameters he did. According to him, this plot was produced with a laser power of 515, on an ATLAS07 BZ3 sensor, without a neutral density filter. Without even getting results, it becomes apparent that something has changed between his tests and mine. This is because, when I performed a test with the laser at a power of only 511 without a filter, I made a small crater in the sensor. If 511 causes a crater, then 515 would be absolutely untestable. It would appear that the laser is behaving differently than it did before.
             
+
+
+
+
+    \bibliography{ref.bib}    
+    \bibliographystyle{apalike}
 
 
 
