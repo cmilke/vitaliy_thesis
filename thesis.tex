@@ -234,7 +234,7 @@
             \end{figure}
 
             %turning on the laser
-            With that out of the way, the first thing to do is to turn on the sensor power supply. Assuming you wired everything up correctly, you want to bias the sensor with negative voltage. I've found that the best place to start is by biasing to -50 volts, as the laser is less likely to damage the sensor at this voltage. Once you've assured yourself that you have a solid bias connection, it is time to turn on the Alessi Power Supply. As of writing this thesis, you will want to set the laser power to 511. As mentioned in section \ref{sect:mystery}, the laser power that we can operate at does not seem to be consistent, and you may need to use a different value. The important thing is to not go too high. Using too large a value here is guaranteed to break the sensor.
+            With that out of the way, the first thing to do is to turn on the sensor power supply. Assuming you wired everything up correctly, you want to bias the sensor with negative voltage. I've found that the best place to start is by biasing to -50 volts, as the laser is less likely to damage the sensor at this voltage. Once you've assured yourself that you have a solid bias connection, it is time to turn on the Alessi Power Supply. As of writing this thesis, you will want to set the laser power to 511. As mentioned in section \ref{sect:laser_power}, the laser power that we can operate at does not seem to be consistent, and you may need to use a different value. The important thing is to not go too high. Using too large a value here is guaranteed to break the sensor.
 
             \begin{figure}[h] 
                 \includegraphics[height=.4\textheight]{50V_spike}
@@ -302,63 +302,196 @@
         \section{Initial Non-PTP Tests}
             The very first laser injection tests I performed were on ATLAS07 BZ6 sensors. These initial tests were actually a mistake, as the BZ6 model does not posses a notable PTP structure. As will be seen in the following section though, PTP equipped sensors are very problematic, especially when compared to sensors which do not have a PTP structure. As such, this first set of tests provides a useful comparison.
 
-            The first set of tests were performed using the NENIR510B neutral density filter, with the laser power set to 509. They were performed on ATLAS07 BZ6, wafers 50 and 51 using the setup described in section \ref{sect:methods}. All tests were performed up to a bias voltage of -200 volts, and all tests completed without any issue. No damage spikes were ever seen, and the leakage currents through the sensors were the same as before the tests were started. The peak voltage versus bias voltage plots for the sensors are shown in figures [TODO: get plots from:
-            %150805_atlas07_w50_BZ6-P12 and 150806_atlas07_w51_BZ6-P12
-            ]. What should be noted in these plots is that the voltage curve never flattens out. The peak voltage continues increasing almost linearly with the bias voltage across the entire voltage range. This unborken linear dependence is completely expected in the BZ6 model sensors, as they lack any significany PTP structure.
+            \begin{figure}[h] 
+                \includegraphics[height=.4\textheight]{Peak_Voltage__150805_atlas07_w50_BZ6-P12__laser_near}
+                \centering
+                \caption{ Peak Voltage of the sensor ATLAS07 BZ6, W50 Pad 12. The laser here was targeting the near side of the sensor, using the NENIR510B filter and a laser power of 509. }
+                \label{fig:Peak_Voltage__150805_atlas07_w50_BZ6-P12__laser_near}
+            \end{figure}
+
+            \begin{figure}[h] 
+                \includegraphics[height=.4\textheight]{Peak_Voltage__150805_atlas07_w50_BZ6-P12__laser_far}
+                \centering
+                \caption{ Peak Voltage of the sensor ATLAS07 BZ6, W50 Pad 12. The laser here was targeting the far side of the sensor, using the NENIR510B filter and a laser power of 509. }
+                \label{fig:Peak_Voltage__150805_atlas07_w50_BZ6-P12__laser_far}
+            \end{figure}
+
+            \begin{figure}[h] 
+                \includegraphics[height=.4\textheight]{Peak_Voltage__150806_atlas07_w51_BZ6-P12__laser_near}
+                \centering
+                \caption{ Peak Voltage of the sensor ATLAS07 BZ6, W51 Pad 12. The laser here was targeting the near side of the sensor, using the NENIR510B filter and a laser power of 509. }
+                \label{fig:Peak_Voltage__150806_atlas07_w51_BZ6-P12__laser_near}
+            \end{figure}
+
+            \begin{figure}[h] 
+                \includegraphics[height=.4\textheight]{Peak_Voltage__150806_atlas07_w51_BZ6-P12__laser_far}
+                \centering
+                \caption{ Peak Voltage of the sensor ATLAS07 BZ6, W51 Pad 12. The laser here was targeting the far side of the sensor, using the NENIR510B filter and a laser power of 509. }
+                \label{fig:Peak_Voltage__150806_atlas07_w51_BZ6-P12__laser_far}
+            \end{figure}
+
+            The first set of tests were performed using the NENIR510B neutral density filter, with the laser power set to 509. They were performed on ATLAS07 BZ6, wafers 50 and 51 using the setup described in section \ref{sect:methods}. All tests were performed up to a bias voltage of -200 volts, and all tests completed without any issue. No damage spikes were ever seen, and the leakage currents through the sensors were the same as before the tests were started. The peak voltage versus bias voltage plots for the sensors are shown in figures \ref{fig:Peak_Voltage__150805_atlas07_w50_BZ6-P12__laser_near} through \ref{fig:Peak_Voltage__150806_atlas07_w51_BZ6-P12__laser_far}. What should be noted in these plots is that the voltage curve never flattens out. The peak voltage continues increasing almost linearly with the bias voltage across the entire voltage range. This unborken linear dependence is completely expected in the BZ6 model sensors, as they lack any significany PTP structure.
 
         \section{Standard Laser Injection Testing} \label{sect:std_tests}
             The next round of tests used sensors equipped with a strong PTP structure. Specifically, the ATLAS07 BZ4A model sensor, the ATLAS12A BZ3C model sensor, and, very briefly, a LowR sensor. I should note that, at some point during these tests \footnote{Specifically, the switch may have been done at any point between the first ATLAS07 BZ6 test from earlier, up to the ATLAS12A BZ3C W757 Halfmoon: Left P14 tests.} I switched the neutral density filter from the NENIR510B model, to the weaker NENIR504B model. The reason is that the 510 did not actually fit the laser, and scraped against the holder everytime it was rotated. I'm kicking myself for not writing down when I swapped out the filters, but future studies (specifically, those in section \ref{sect:new_filters}) suggest that it probably did not matter either way, as even the NENIR513B filter was unable to protect the sensors. In any case, these PTP equipped sensors are where we began to see serious problems.
+
+            \begin{figure}[h] 
+                \includegraphics[height=.4\textheight]{Peak_Voltage__150901_atlas07_w103_bz4a-p4__laser_far}
+                \centering
+                \caption{ Peak Voltage of the sensor ATLAS07 BZ4A, W103 Pad 4. The laser here was targeting the far side of the sensor, using the NENIR510B filter and a laser power of 509. }
+                \label{fig:Peak_Voltage__150901_atlas07_w103_bz4a-p4__laser_far}
+            \end{figure}
+
+            \begin{figure}[h] 
+                \includegraphics[height=.4\textheight]{Peak_Voltage__150901_atlas07_w142_bz4a-p4__laser_far}
+                \centering
+                \caption{ Peak Voltage of the sensor ATLAS07 BZ4A, W142 Pad 4. The laser here was targeting the far side of the sensor, using the NENIR510B filter and a laser power of 509. }
+                \label{fig:Peak_Voltage__150901_atlas07_w142_bz4a-p4__laser_far}
+            \end{figure}
+
+            The first sensor to be tested was the ATLAS07 BZ4A W103-P4 sensor. The incomplete results of this sensor are shown in figure \ref{fig:Peak_Voltage__150901_atlas07_w103_bz4a-p4__laser_far}. The measurements taken from the near dc pads shows the curve fall-off indicative of the PTP structure activating. Unfortunately, in a pattern that will become depressingly consistent throughout the remainder of the results, we have no data beyond this point, which severely limits the observations we can make about the PTP structure in action. The reason we have no more data is that, while shooting the laser near the near dc pad on strip 75 with a bias voltage of -110 volts, I encountered my first damage peak. To avoid damaging the sensor I abandoned strip 75 and moved to strip 60, only to encounter another damage peak at -170 volts with the laser shooting by the far dc pad. The exact same thing happened when I moved to strip 20. In hopes that the issue was with this sensor alone, I moved to another BZ4A type sensor. Specifically, to ATLAS07 BZ4A W142-P4. I attempted to push this sensor further than the last, and ignored the damage peaks. Figures \ref{fig:Peak_Voltage__150901_atlas07_w142_bz4a-p4__laser_far} shows the rather limited results I obtained for my efforts. As I continued firing the laser at the sensor, the damage spikes appeared more and more frequently on the oscilloscope. Beyond this however, there was nothing to suggest the sensor was being damaged \footnote{There actually was damage being done, though special testing is necessary to detect it. See section \ref{sect:ptp_study} for more details.}. That is of course, until I fired the laser one too many times and the leakage current through the sensor instantly jumped from 90 nA all the way to the power supply's compliance setting of 1 $\mu$A. At this point I was forced to cease testing on the sensor.
+
+            \begin{figure}[h] 
+                \includegraphics[height=.4\textheight]{Peak_Voltage__150902_atlas12a_w757_bz3c-p14__laser_far}
+                \centering
+                \caption{ Peak Voltage of the sensor ATLAS12A BZ3C, W757 Pad 14. The laser here was targeting the far side of the sensor, using the NENIR510B filter and a laser power of 509. }
+                \label{fig:Peak_Voltage__150902_atlas12a_w757_bz3c-p14__laser_far}
+            \end{figure}
+
+            With the failure of the ATLAS07 laser injection testing, I attempted to instead do testing on the ATLAS12A sensors. I started with the sensor ATLAS12A BZ3C W757 Halfmoon: Left P14. I followed the same procedure as before, with the results visible in figure \ref{fig:Peak_Voltage__150902_atlas12a_w757_bz3c-p14__laser_far}. Despite ATLAS12A BZ3C sensors possessing a PTP structure, the PTP structure's effects are not visible. The reason for this is that the ATLAS12A BZ3C PTP structure activates at roughly 300 volts. As with the previous sensor, I pushed this one too far, and the leakage current jumped to compliance (1 j$\mu$A) at a bias voltage of -200 V.
+
             
-            The first sensor to be tested was the ATLAS07 BZ4A W103-P4 sensor. The incomplete results of this sensor are shown in figure [TODO: get plots from:
-            %150901_atlas07_w103_bz4a-p4. Or just use the plots in the "useful" directory
-            ]. The measurements taken from the near dc pads shows the curve fall-off indicative of the PTP structure activating. Unfortunately, in a pattern that will become depressingly consistent throughout the remainder of the results, we have no data beyond this point, which severely limits the observations we can make about the PTP structure in action. The reason we have no more data is that, while shooting the laser near the near dc pad on strip 75 with a bias voltage of -110 volts, I encountered my first damage peak, visible in figure [TODO: use plots from
-            %archive/exluded
-            ]. To avoid damaging the sensor I abandoned strip 75 and moved to strip 60, only to encounter another damage peak at -170 volts with the laser shooting by the far dc pad. The exact same thing happened when I moved to strip 20. In hopes that the issue was with this sensor alone, I moved to another BZ4A type sensor. Specifically, to ATLAS07 BZ4A W142-P4. I attempted to push this sensor further than the last, and ignored the damage peaks. Figures [TODO: plots
-            %150901_atlas07_w103_bz4a-p4
-            ] shows the rather limited results I obtained for my efforts. As I continued firing the laser at the sensor, the damage spikes appeared more and more frequently on the oscilloscope. Beyond this however, there was nothing to suggest the sensor was being damaged \footnote{There actually was damage being done, though special testing is necessary to detect it. See section \ref{sect:ptp_study} for more details.}. That is of course, until I fired the laser one too many times and the leakage current through the sensor instantly jumped from 90 nA all the way to the power supply's compliance setting of 1 $\mu$A. At this point I was forced to cease testing on the sensor.
+            \begin{figure}[h] 
+                \includegraphics[height=.4\textheight]{Peak_Voltage__150908_atlas12a_w757_bz3c-p15__laser_far}
+                \centering
+                \caption{ Peak Voltage of the sensor ATLAS12A BZ3C, W757 Pad 15. The laser here was targeting the far side of the sensor, using the special unlabelled black filter and a laser power of 511. }
+                \label{fig:Peak_Voltage__150908_atlas12a_w757_bz3c-p15__laser_far}
+            \end{figure}
 
-            With the failure of the ATLAS07 laser injection testing, I attempted to instead do testing on the ATLAS12A sensors. I started with the sensor ATLAS12A BZ3C W757 Halfmoon: Left P14. I followed the same procedure as before, with the results visible in figure [TODO: plots
-            %150902_atlas12a_w757_bz3c 
-            ]. Despite ATLAS12A BZ3C sensors possessing a PTP structure, the PTP structure's effects are not visible. The reason for this is that the ATLAS12A BZ3C PTP structure activates at roughly 300 volts. As with the previous sensor, I pushed this one too far, and the leakage current jumped to compliance (1 j$\mu$A) at a bias voltage of -200 V.
-
-            Another test on an ATLAS12A BZ3C was attempted, using the ATLAS12A BZ3C W757 Halfmoon: Left P15 sensor. Two changes were made to the setup here. First, I switched out the neutral density filter, swapping the NENIR504B filter for an unmarked black filter\footnote{I performed tests in which I shot the laser at full power through various filters at a dummy sensor, comparing the sizes of the craters made with each filter.. I found that this particular black filter left the second smallest crater of all the filters we had at the time, with only the NENIR510B outperforming it.}(see figure [TODO: pic of black filter]). Second, I upped the laser power from 509 to 511; section [TODO: discuss laser power in introduction] explains why this increase is safe. With that said, the results of this tests are presented in figure [TODO: plots
-            %150908_atlas12a_757_bz3c-p15
-            ]. The telltale platueing of the peak voltages is just barely becoming visible at the edge of the tested bias voltages, but, just as with the ATLAS07 sensors, I was unable to continue further. At a bias voltage of -200 V and the laser firing by the near DC pad, I began to see damge spikes and decided to cease testing of the sensor. At this point it was apparent that something different had to be done.
+            Another test on an ATLAS12A BZ3C was attempted, using the ATLAS12A BZ3C W757 Halfmoon: Left P15 sensor. Two changes were made to the setup here. First, I switched out the neutral density filter, swapping the NENIR504B filter for an unmarked black filter\footnote{I performed tests in which I shot the laser at full power through various filters at a dummy sensor, comparing the sizes of the craters made with each filter.. I found that this particular black filter left the second smallest crater of all the filters we had at the time, with only the NENIR510B outperforming it.}. Second, I upped the laser power from 509 to 511; section \ref{sect:laser_power} explains why this increase is safe. With that said, the results of this tests are presented in figure \ref{fig:Peak_Voltage__150908_atlas12a_w757_bz3c-p15__laser_far}. The telltale platueing of the peak voltages is just barely becoming visible at the edge of the tested bias voltages, but, just as with the ATLAS07 sensors, I was unable to continue further. At a bias voltage of -200 V and the laser firing by the near DC pad, I began to see damge spikes and decided to cease testing of the sensor. At this point it was apparent that something different had to be done.
             
 
         \section{Tissue Paper}
             Colin Parker wrote a thesis on these laser injection studies, and in it he discusses the usefulness of the neutral density filters. He concludes that the neutral density filters have no significant effect on the laser \footnote{I should note that this conclusion is misleading. A more accurate conclusion is that the \textit{extremely weak} NENIR501B and NENIR502B neutral density filters he uses have no effect on the laser. The more powerful filters (NENIR 504B, 510B, 513B, 520B, and 530B) most certainly \textbf{do} have an effect.}. He then proceeds to develop a method of testing which uses a variable number of pieces of tissue paper placed directly in front of the microscope lens in order to attenuate the laser. A piece of black paper with a small hole cut into it is then placed between the microscope and sensor, in order to shield the rest of the sensor from the attenuated laser light. A picture of my version of this setup can be seen in figure [TODO: tissue paper setup pic]. I used two pieces of tissue paper, a laser power of 513, and \textit{no} neutral density filter to perform these tests.
 
-            Two sensors were tested using a two tissue setup: ATLAS12A BZ3F W[FIXME]-P2 and ATLAS12A BZ3F W[FIXME]-P3. The data for P3 is shown in figure [TODO: plots
-            %150914_atlas12a_bz3f-p03 ; check the ignore folder for pics TODO: also check the strip 25 test to see what happened.
-            ]. While the sensor was able to tolerate testing up to -400 volt bias, the results are completely useless. The test on the P2 sensor was not recorded, but merely used to confirm that the behaviour seen in the P3 sensor was not because of a defect in the sensor. The P2 sensor was capable of tolerating laser shots up to -700 volts, but peak voltages stopped increasing beyond a bias voltage of only -5 V, whereupon it displayed the same behaviour as the P3 sensor. My hypothesis is that the tissue paper attenuates the laser to such a high degree that only a tiny amount of light is able to reach the sensor to induce charge in the strip. This current is so small, that all of the charge is able to be picked up when the sensor is biased to only 5-10 V. As a result, I do not believe that the use of tissue paper (at least with this procedure) is a viable way to perform laser injection tests.
+            \begin{figure}[h] 
+                \includegraphics[height=.4\textheight]{Peak_Voltage__150914_atlas12a_bz3f-p03__laser_near}
+                \centering
+                \caption{ Peak Voltage of the sensor ATLAS12A BZ3C, W142 Pad 3. The laser here was targeting the near side of the sensor with a laser power of 511. No neutral density filter was used. Instead, two pieces of tissure paper were stretched across the lens of the microscope. }
+                \label{fig:Peak_Voltage__150914_atlas12a_bz3f-p03__laser_near}
+            \end{figure}
+
+            \begin{figure}[h] 
+                \includegraphics[height=.4\textheight]{Peak_Voltage__150914_atlas12a_bz3f-p03__laser_far}
+                \centering
+                \caption{ Peak Voltage of the sensor ATLAS12A BZ3C, W142 Pad 3. The laser here was targeting the far side of the sensor with a laser power of 511. No neutral density filter was used. Instead, two pieces of tissure paper were stretched across the lens of the microscope. }
+                \label{fig:Peak_Voltage__150914_atlas12a_bz3f-p03__laser_far}
+            \end{figure}
+
+            Two sensors were tested using a two tissue setup: ATLAS12A BZ3F W142-P2 and ATLAS12A BZ3F W142-P3. The data for P3 is shown in figure \ref{fig:Peak_Voltage__150914_atlas12a_bz3f-p03__laser_far}. While the sensor was able to tolerate testing up to -400 volt bias, the results are completely useless. The test on the P2 sensor was not recorded, but merely used to confirm that the behaviour seen in the P3 sensor was not because of a defect in the sensor. The P2 sensor was capable of tolerating laser shots up to -700 volts, but peak voltages stopped increasing beyond a bias voltage of only -5 V, whereupon it displayed the same behaviour as the P3 sensor. My hypothesis is that the tissue paper attenuates the laser to such a high degree that only a tiny amount of light is able to reach the sensor to induce charge in the strip. This current is so small, that all of the charge is able to be picked up when the sensor is biased to only 5-10 V. As a result, I do not believe that the use of tissue paper (at least with this procedure) is a viable way to perform laser injection tests.
 
             
 
         \section{Peltier Cooling}
-            The next attempt at performing these tests was to try cooling the sensors throughout the course of the testing. The thought behind this is that the sensor may be failing because the laser is slowly overheating it. As such, simply keeping the sensor cool may remedy the problem. Because cold testing is rather tedious (due to the need for nitrogen displacement), I started by simply maintaining the sensor at room temperature. I performed this test for a number of ATLAS07 and ATLAS12A sensors, with the data for all of them displayed in figures [TODO: lots of plots
-            %150923_atlas12a_bz3F-p03, 150924_atlas12a_bz3f-p03, 151001_atlas07a_bz4a-p04
-            ]. All experiments used a laser power of 511, and the same unlabeled black filter from section \ref{sect:std_tests}. The results were slightly better than those without cooling, but were all ultimately unsuccesful. Not shown in the figures are the sensor tests which either ended in damage peaks or leakage current jumps \footnote{These would be: ATLAS12A BZ3F P3 strip 60: leakage current jump; ATLAS07 BZ4A P4 strip 50: damage peak at laser far, -210 V bias; and ATLAS07 BZ4A W138-P4: damage peak at laser far, -170 V bias.}.
+            \begin{figure}[h] 
+                \includegraphics[height=.4\textheight]{Peak_Voltage__150923_atlas12a_bz3f-p03__laser_near}
+                \centering
+                \caption{ Peak Voltage of the sensor ATLAS12A BZ3C, W142 Pad 3. The laser here was targeting the near side of the sensor, using the unlabelled black filter and a laser power of 511. }
+                \label{fig:Peak_Voltage__150923_atlas12a_bz3f-p03__laser_near}
+            \end{figure}
 
-            With these tests unsucessful, I decided to do another test using cooling well below room temperature. I cooled the sensor to just around 0$^\circ$ C, and tested the ATLAS12A BZ3C W757-P2 sensor. This may have been the single most sucessful test I performed, obtaining data (figure [TODO: plot
-            %151008_atlas12a_bz3c-p2_w757 
-            ]) all the way to a bias voltage -500 V with the laser pointed by the far dc pad. Unfortunately, while collecting the data at -500 V, the sensor failed catastrophically. Figure [TODO: pic of the crate left on the bias ring] shows the damage done on the bias ring from the final voltage discharge. Note that this is on the bias ring, not the strip, and was not caused by the laser directly. The crater was directly under the bias probe tip, indicating a large electrical discharge between the two. I had been having a number of issues maintaining contact between the probe tip and the bias ring, and this may have merely been a short, and not a consequence of the laser. Moreover, until the moment it failed, I had seen absolutely no damage peaks on the oscilloscope. The only noteworthy element of the test which could have been warning a sign is that at the very highest bias voltages, I began noticing an unusually high number of small (|< 10 V|) peaks on the oscilloscope. I am unsure as to the relation, if any, between this and the failure of the sensor. As for the data itself, it is slightly concerning how low the peak voltage is when it reaches the platue stage. However, this may have just been a result of the low temperatures. What is much more important though is that the peak voltages do platue, and the PTP structure's activation is quite visible. Given the relative success of this method compared to almost every other laser injection method I attempted, I would recommend looking into this method again. Of course I make this conclusion only in hindsight, and at the time did not give this method any more merit than the others, due to the difficulty of cold testing and the ultimate failure of the sensor. As such, I continued on with other methods.
+            \begin{figure}[h] 
+                \includegraphics[height=.4\textheight]{Peak_Voltage__150923_atlas12a_bz3f-p03__laser_far}
+                \centering
+                \caption{ Peak Voltage of the sensor ATLAS12A BZ3C, W142 Pad 3. The laser here was targeting the far side of the sensor, using the unlabelled black filter and a laser power of 511. }
+                \label{fig:Peak_Voltage__150923_atlas12a_bz3f-p03__laser_far}
+            \end{figure}
+
+            \begin{figure}[h] 
+                \includegraphics[height=.4\textheight]{Peak_Voltage__150924_atlas12a_bz3f-p03__laser_far}
+                \centering
+                \caption{ Peak Voltage of the sensor ATLAS12A BZ3C, W142 Pad 3. The laser here was targeting the far side of the sensor, using the unlabelled black filter and a laser power of 511. }
+                \label{fig:Peak_Voltage__150924_atlas12a_bz3f-p03__laser_far}
+            \end{figure}
+
+            \begin{figure}[h] 
+                \includegraphics[height=.4\textheight]{Peak_Voltage__151007_atlas07_bz4a-p4_w190__laser_far}
+                \centering
+                \caption{ Peak Voltage of the sensor ATLAS07 BZ4A, W190 Pad 4. The laser here was targeting the far side of the sensor, using the unlabelled black filter and a laser power of 511. }
+                \label{fig:Peak_Voltage__151007_atlas07_bz4a-p4_w190__laser_far}
+            \end{figure}
+
+            The next attempt at performing these tests was to try cooling the sensors throughout the course of the testing. The thought behind this is that the sensor may be failing because the laser is slowly overheating it. As such, simply keeping the sensor cool may remedy the problem. Because cold testing is rather tedious (due to the need for nitrogen displacement), I started by simply maintaining the sensor at room temperature. I performed this test for a number of ATLAS07 and ATLAS12A sensors, with the data for all of them displayed in figures \ref{fig:Peak_Voltage__150923_atlas12a_bz3f-p03__laser_near} through \ref{fig:Peak_Voltage__151007_atlas07_bz4a-p4_w190__laser_far}. All experiments used a laser power of 511, and the same unlabeled black filter from section \ref{sect:std_tests}. The results were slightly better than those without cooling, but were all ultimately unsuccesful. Not shown in the figures are the sensor tests which either ended in damage peaks or leakage current jumps \footnote{These would be: ATLAS12A BZ3F P3 strip 60: leakage current jump; ATLAS07 BZ4A P4 strip 50: damage peak at laser far, -210 V bias; and ATLAS07 BZ4A W138-P4: damage peak at laser far, -170 V bias.}.
+
+            \begin{figure}[h] 
+                \includegraphics[height=.4\textheight]{Peak_Voltage__151008_atlas12a_bz3c-p02_w757__laser_far}
+                \centering
+                \caption{ Peak Voltage of the sensor ATLAS12A BZ3C, W757 Pad 2. The laser here was targeting the far side of the sensor, using the unlabelled black filter and a laser power of 511. }
+                \label{fig:Peak_Voltage__151008_atlas12a_bz3c-p02_w757__laser_far}
+            \end{figure}
+
+            With these tests unsucessful, I decided to do another test using cooling well below room temperature. I cooled the sensor to just around 0$^\circ$ C, and tested the ATLAS12A BZ3C W757-P2 sensor. This may have been the single most sucessful test I performed, obtaining data (figure \ref{fig:Peak_Voltage__151008_atlas12a_bz3c-p02_w757__laser_far}) all the way to a bias voltage -500 V with the laser pointed by the far dc pad. Unfortunately, while collecting the data at -500 V, the sensor failed catastrophically. Figure [TODO: pic of the crater left on the bias ring] shows the damage done on the bias ring from the final voltage discharge. Note that this is on the bias ring, not the strip, and was not caused by the laser directly. The crater was directly under the bias probe tip, indicating a large electrical discharge between the two. I had been having a number of issues maintaining contact between the probe tip and the bias ring, and this may have merely been a short, and not a consequence of the laser. Moreover, until the moment it failed, I had seen absolutely no damage peaks on the oscilloscope. The only noteworthy element of the test which could have been warning a sign is that at the very highest bias voltages, I began noticing an unusually high number of small ($|< 10|$ V) peaks on the oscilloscope. I am unsure as to the relation, if any, between this and the failure of the sensor. As for the data itself, it is slightly concerning how low the peak voltage is when it reaches the platue stage. However, this may have just been a result of the low temperatures. What is much more important though is that the peak voltages do platue, and the PTP structure's activation is quite visible. Given the relative success of this method compared to almost every other laser injection method I attempted, I would recommend looking into this method again. Of course I make this conclusion only in hindsight, and at the time did not give this method any more merit than the others, due to the difficulty of cold testing and the ultimate failure of the sensor. As such, I continued on with other methods.
 
 
             
         \section{Low R Sensors}
-            This is a brief section, but should nonetheless be addressed. After all the tests on the ATLAS12 sensors, I was advised to test a different kind of sensor, known as a LowR sensor, which also possesses a ptp structure. The results for these tests are displayed in figure [TODO:
-            %151015_lowR_batch6958_w03_1m_d18_p06_s06-s1b
-            ]. These tests were done using the standard procedure, and faced the same problems as the ATLAS07 BZ4 and ATLAS12 sensors. That is, I encountered damage spikes and was forced to abondon testing before I reached bias voltages that would reveal the ptp structure fully.
+            \begin{figure}[h] 
+                \includegraphics[height=.4\textheight]{Peak_Voltage__151015_lowR_batch6958_w03_1m_d18_p06_s06-s1b__laser_near}
+                \centering
+                \caption{ Peak Voltage of the sensor LowR Batch6958, w03\_1m\_d18\_p06\_s06-s1b. The laser here was targeting the near side of the sensor, using the unlabelled black filter and a laser power of 511. }
+                \label{fig:Peak_Voltage__151015_lowR_batch6958_w03_1m_d18_p06_s06-s1b__laser_near}
+            \end{figure}
+
+            \begin{figure}[h] 
+                \includegraphics[height=.4\textheight]{Peak_Voltage__151015_lowR_batch6958_w03_1m_d18_p06_s06-s1b__laser_far}
+                \centering
+                \caption{ Peak Voltage of the sensor LowR Batch6958, w03\_1m\_d18\_p06\_s06-s1b. The laser here was targeting the far side of the sensor, using the unlabelled black filter and a laser power of 511. }
+                \label{fig:Peak_Voltage__151015_lowR_batch6958_w03_1m_d18_p06_s06-s1b__laser_far}
+            \end{figure}
+
+            \begin{figure}[h] 
+                \includegraphics[height=.4\textheight]{Peak_Voltage__151021_lowR_batch6958_w03_1m_d18_p06_s06-s1b__laser_near}
+                \centering
+                \caption{ Peak Voltage of the sensor LowR Batch6958, w03\_1m\_d18\_p06\_s06-s1b. The laser here was targeting the near side of the sensor, using the unlabelled black filter and a laser power of 511. }
+                \label{fig:Peak_Voltage__151021_lowR_batch6958_w03_1m_d18_p06_s06-s1b__laser_near}
+            \end{figure}
+
+            \begin{figure}[h] 
+                \includegraphics[height=.4\textheight]{Peak_Voltage__151021_lowR_batch6958_w03_1m_d18_p06_s06-s1b__laser_far}
+                \centering
+                \caption{ Peak Voltage of the sensor LowR Batch6958, w03\_1m\_d18\_p06\_s06-s1b. The laser here was targeting the far side of the sensor, using the unlabelled black filter and a laser power of 511. }
+                \label{fig:Peak_Voltage__151021_lowR_batch6958_w03_1m_d18_p06_s06-s1b__laser_far}
+            \end{figure}
+
+            This is a brief section, but should nonetheless be mentioned. After all the tests on the ATLAS12 sensors, I was advised to test a different kind of sensor, known as a LowR sensor, which also possesses a ptp structure. The results for these tests are displayed in figures \ref{fig:Peak_Voltage__151015_lowR_batch6958_w03_1m_d18_p06_s06-s1b__laser_far} through \ref{fig:Peak_Voltage__151021_lowR_batch6958_w03_1m_d18_p06_s06-s1b__laser_far}. These tests were done using the standard procedure, and faced the same problems as the ATLAS07 BZ4 and ATLAS12 sensors. That is, I encountered damage spikes and was forced to abondon testing before I reached bias voltages that would reveal the ptp structure fully.
 
 
 
         \section{More Powerful Filters} \label{sect:new_filters}
             The final test that I did was to use a couples more powerful neutral density filters. First, I attempted to use the NENIR513B neutral density filter. I did not take data though, as a brief test with an ATLAS04 BZ4A sensor showed the typical damage peaks around the 200 V bias voltage mark. A full test to the necessary bias voltages would have almost certainly resulted in the sensor being damaged.  
 
-            With the 513B not powerful enough, I moved onto a more powerful filter. Specifically, I used the NENIR520B filter with the ATLAS07 BZ4A W190-P4 and ATLAS07 BZ3 W51-P6 sensors. Their results are shown in figures [TODO:
-            %160527_atlas07_w190_bz4a-p4  and  160601_atlas07_w51_bz3-p6
-            ]. The sensors were in fact able to survive up to -250 volts, high enough that ptp effects should be visible in the BZ4A. Unfortunately, the high powered filter appears to be having an effect not unlike that of the tissue paper. The peak voltages platue much earlier than they should, and the variance of the peak voltages becomes enourmous. Thus, it would seem, that the 513B is not powerful enough to protect the sensor, but the 520B is so powerful the it renders the results of any tests with it useless.
+            \begin{figure}[h] 
+                \includegraphics[height=.4\textheight]{160527_atlas07_w190_bz4a-p4}
+                \centering
+                \caption{ Peak Voltage of the sensor ATLAS07 BZ4A, W190 Pad 4. These tests used the NENIR520B filter and a laser power of 511. }
+                \label{fig:160527_atlas07_w190_bz4a-p4}
+            \end{figure}
+
+            \begin{figure}[h] 
+                \includegraphics[height=.4\textheight]{160601_atlas07_w51_bz3-p6}
+                \centering
+                \caption{ Peak Voltage of the sensor ATLAS07 BZ3, W51 Pad 6. These tests used the NENIR520B filter and a laser power of 511. }
+                \label{fig:160601_atlas07_w51_bz3-p6}
+            \end{figure}
+
+            \begin{figure}[h] 
+                \includegraphics[height=.4\textheight]{160624_atlas07_w51_bz3-p6}
+                \centering
+                \caption{ Peak Voltage of the sensor ATLAS07 BZ3, W51 Pad 6. These tests used the unlabelled black filter and a laser power of 511. This test suite was simply done to ensure that the issue with the previous to experiments was the NENIR520B filter, and not a defect of the laser, oscilloscope, or any other hardware. }
+                \label{fig:160624_atlas07_w51_bz3-p6}
+            \end{figure}
+
+            With the 513B not powerful enough, I moved onto a more powerful filter. Specifically, I used the NENIR520B filter with the ATLAS07 BZ4A W190-P4 and ATLAS07 BZ3 W51-P6 sensors. Their results are shown in figures \ref{fig:160527_atlas07_w190_bz4a-p4} and \ref{fig:160601_atlas07_w51_bz3-p6}. The sensors were in fact able to survive up to -250 volts, high enough that ptp effects should be visible in the BZ4A. Unfortunately, the high powered filter appears to be having an effect not unlike that of the tissue paper. The peak voltages platue much earlier than they should, and the variance of the peak voltages becomes enourmous. Thus, it would seem, that the 513B is not powerful enough to protect the sensor, but the 520B is so powerful the it renders the results of any tests with it useless.
 
 
 
@@ -372,26 +505,94 @@
 
     \chapter{Appendices}
         \section{SPICE Circuit Analysis}
-            Less an experimental test, and more a sanity check, Vitaliy had me perform a SPICE simulation of the laser setup and see if something in the circuit itself was the issue. His concern was that certain capicatative or inductive components of the circuit could be releasing harmful amounts of voltage into the sensor. A picture of the simulated circuit is shown in figure (TODO: take a screenshot of the circuit). Ultimately, I found nothing alarming in my simulations. There were a few locations where inductance caused small effects, but nothing catastrophic. I list this here mostly as a reference in case Vitaliy wants a more detailed/altered simulation of this experiment in the future. Of course, a screenshot is not the most helpful way to see a SPICE circuit, so I would strongly recommend asking Vitaliy if he still has a copy of the file I sent to him, or simply download it from my github account at \url{https://github.com/cmilke/scipp\_atlas\_repository} (hopefully I still have that account when and if you need this).
+
+            \begin{figure}[h] 
+                \includegraphics[height=.4\textheight]{spice_circuit}
+                \centering
+                \caption{ A spice simulation of the typical circuit I have used in the laser injection tests. }
+                \label{fig:spice_circuit}
+            \end{figure}
+
+            Less an experimental test, and more a sanity check, Vitaliy had me perform a SPICE simulation of the laser setup and see if something in the circuit itself was the issue. His concern was that certain capicatative or inductive components of the circuit could be releasing harmful amounts of voltage into the sensor. A picture of the simulated circuit is shown in figure \ref{fig:spice_circuit}. Ultimately, I found nothing alarming in my simulations. There were a few locations where inductance caused small effects, but nothing catastrophic. I list this here mostly as a reference in case Vitaliy wants a more detailed/altered simulation of this experiment in the future. Of course, a screenshot is not the most helpful way to see a SPICE circuit, so I would strongly recommend asking Vitaliy if he still has a copy of the file I sent to him, or simply download it from my github account at \url{https://github.com/cmilke/scipp\_atlas\_repository} (hopefully I still have that account when and if you need this).
+
+
 
         \section{PTP Structure Study} \label{sect:ptp_study}
             One of the many extra tests I did was to test the PTP structure's resistance at varying distances from a strip, before and after the strip underwent laser injection testing. What this provided was a quantitative comparison of the range of damage that laser injection has. Before I explain the results, allow to briefly go over the setup. A sensor is placed onto the chuck, and a total of five probe tips are touched down onto it. One strip is designated as the target strip. Two of the five probes are placed down onto the target strip, one on the dc pad nearest the bias resistor, the other on the dc pad furthest from the bias resistor. One additional probe is placed on each of the strips immediately adjacent to the target strip, both of the them on the dc pad nearest their respective bias resistor. The fifth and final probe is touched down on the bias ring. The bias ring probe is merely connected to the ground of a high voltage power supply. The other four are all connected to a parameter analyzer. The one probe at the far dc pad is held at ground by the parameter analyzer. The remaining three probes are held at the same voltage $x$, where $x$ will vary as a function of time. This setup is illustrated in figure [TODO: make a diagram of this because it's complicated]. The reason for the three probes being held at the same voltage is to ensure that the current through the target strip has no reason to pass to the adjacent strips; the current can only flow to ground through the bias resistor or PTP structure.
 
-            The target current through the dc pad of the target strip is measured as a function of voltage (from about 0 volts to -50 volts) while the bias voltage is held at 200 volts \footnote{This is for an ATLAS07 BZ4A. The bias voltage should be whatever the PTP activation voltage is for the sensor being tested}. By taking the discrete derivative of the resulting IV curve, you can obtain the resistance of the strip as a function of voltage. I produced a number of these RV plots for a number of strips on one sensor, at increasing distance from the original target strip. I then performed a laser injection test on the strip and redid all the RV plots for the same strips. Figures [TODO: a ton of figures, all in 
-            %/home/cmilke/ATLAS/data/ptp/151221_atlas07_bz3/images/resistance/individual_strips
-            ] show all the strip resistances before and after laser testing, with strip 80 being the one that was shot with a laser. There is a very distinguished difference between the before and after plots, all the way out to about ten strips away. This difference is illustrated more clearly in figures [TODO:
-            %/home/cmilke/ATLAS/data/ptp/151221_atlas07_bz3/images/resistance/comparison
-            ], where the difference between the strip resistances before and after laser injection is plotted as a function of the voltage. Note that, while the laser injection test used for these plots persisted until the leakage current of the sensor jumped, a leakage current jump is not required to see this kind of damage on a strip. Another sensor, whose leakage current was intact, was also tested and showed similar RV behaviour at the laser targetted strip.
+            \begin{figure}[h] 
+                \includegraphics[height=.4\textheight]{atlas07_w142_bz3-p15_strip70_resistance_plots}
+                \centering
+                \caption{ PTP measurements of an ATLAS07 sensor before and after laser injection testing. The laser was aimed at the near side, strip 80, using the unlabelled black filter. }
+                \label{fig:atlas07_w142_bz3-p15_strip70_resistance_plots}
+            \end{figure}
 
+            \begin{figure}[h] 
+                \includegraphics[height=.4\textheight]{atlas07_w142_bz3-p15_strip74_resistance_plots}
+                \centering
+                \caption{ PTP measurements of an ATLAS07 sensor before and after laser injection testing. The laser was aimed at the near side, strip 80, using the unlabelled black filter. }
+                \label{fig:atlas07_w142_bz3-p15_strip74_resistance_plots}
+            \end{figure}
+
+            \begin{figure}[h] 
+                \includegraphics[height=.4\textheight]{atlas07_w142_bz3-p15_strip76_resistance_plots}
+                \centering
+                \caption{ PTP measurements of an ATLAS07 sensor before and after laser injection testing. }
+                \label{fig:atlas07_w142_bz3-p15_strip76_resistance_plots}
+            \end{figure}
+
+            \begin{figure}[h] 
+                \includegraphics[height=.4\textheight]{atlas07_w142_bz3-p15_strip78_resistance_plots}
+                \centering
+                \caption{ PTP measurements of an ATLAS07 sensor before and after laser injection testing. The laser was aimed at the near side, strip 80, using the unlabelled black filter. }
+                \label{fig:atlas07_w142_bz3-p15_strip78_resistance_plots}
+            \end{figure}
+
+            \begin{figure}[h] 
+                \includegraphics[height=.4\textheight]{atlas07_w142_bz3-p15_strip80_resistance_plots}
+                \centering
+                \caption{ PTP measurements of an ATLAS07 sensor before and after laser injection testing. The laser was aimed at the near side, strip 80, using the unlabelled black filter. }
+                \label{fig:atlas07_w142_bz3-p15_strip80_resistance_plots}
+            \end{figure}
+
+            The target current through the dc pad of the target strip is measured as a function of voltage (from about 0 volts to -50 volts) while the bias voltage is held at 200 volts \footnote{This is for an ATLAS07 BZ4A. The bias voltage should be whatever the PTP activation voltage is for the sensor being tested}. By taking the discrete derivative of the resulting IV curve, you can obtain the resistance of the strip as a function of voltage. I produced a number of these RV plots for a number of strips on one sensor, at increasing distance from the original target strip. I then performed a laser injection test on the strip and redid all the RV plots for the same strips. Figures \ref{fig:atlas07_w142_bz3-p15_strip70_resistance_plots} and \ref{fig:atlas07_w142_bz3-p15_strip80_resistance_plots} show all the strip resistances before and after laser testing, with strip 80 being the one that was shot with a laser. There is a very distinguished difference between the before and after plots, all the way out to about ten strips away. This difference is illustrated more clearly in figures \ref{fig:atlas07_w142_bz3-p15_clean_resistance_comparison_plots_base} and \ref{fig:atlas07_w142_bz3-p15_clean_resistance_comparison_plots_zoom}, where the difference between the strip resistances before and after laser injection is plotted as a function of the voltage. Note that, while the laser injection test used for these plots persisted until the leakage current of the sensor jumped, a leakage current jump is not required to see this kind of damage on a strip. Another sensor, whose leakage current was intact, was also tested and showed similar RV behaviour at the laser targetted strip.
+
+            \begin{figure}[h] 
+                \includegraphics[height=.4\textheight]{atlas07_w142_bz3-p15_clean_resistance_comparison_plots_base}
+                \centering
+                \caption{ A plot of the difference between PTP measurements of an ATLAS07 sensor before and after laser injection testing. The laser was aimed at the near side, strip 80, using the unlabelled black filter. }
+                \label{fig:atlas07_w142_bz3-p15_clean_resistance_comparison_plots_base}
+            \end{figure}
+
+            \begin{figure}[h] 
+                \includegraphics[height=.4\textheight]{atlas07_w142_bz3-p15_clean_resistance_comparison_plots_zoom}
+                \centering
+                \caption{ A zoomed in plot of the difference between PTP measurements of an ATLAS07 sensor before and after laser injection testing. The laser was aimed at the near side, strip 80, using the unlabelled black filter. }
+                \label{fig:atlas07_w142_bz3-p15_clean_resistance_comparison_plots_zoom}
+            \end{figure}
+            
             The main purpose of this test was to determine the range of damage of laser injection testing on a sensor. However, a brief, but informative, additional test was done to determine where the damage in the strip actually was. The test consisted of putting voltage on the near dc pad of a laser injected strip, and measuring the voltage at the far dc pad. The test was then reversed, putting voltage on the the far dc pad and measuring the voltage on the near dc pad. By comparing the voltages, it was determined that something between the near dc pad and the bias ring had been damaged, and the resistance between the two had dropped. Likely, this was the PTP structure (as other tests showed that the bias resistor was still intact). It is possible that, in other laser injection tests, it would be the PTP structure on the far side of the strip which would fail instead, though I never did tests to confirm this.
 
 
 
-        \section{Charge Collection Mystery} \label{sect:mystery}
-            By far, the most baffling aspect of my year doing these tests is that, while I was thoroughly unable to perform laser injection testing without breaking sensors, a number of people that came before me \textit{have}. Both Collin Parker and Chris Betancourt succeeded in obtaining results from laser injection testing. They met quite a bit of difficulty in doing so, but it was at least possible. Parker's thesis provides a clue to this. In his thesis, figure 3.7 illustrates the charge collected on a number of sensors as a function of distance from the strip he fired the laser at. I have attempted to reproduce this plot using all the parameters he did. According to him, this plot was produced with a laser power of 515, on an ATLAS07 BZ3 sensor, without a neutral density filter. Without even getting results, it becomes apparent that something has changed between his tests and mine. This is because, when I performed a test with the laser at a power of only 511 without a filter, I made a small crater in the sensor. If 511 causes a crater, then 515 would be absolutely untestable. It would appear that the laser is behaving differently than it did before.
+        \section{Laser Power} \label{sect:laser_power}
+            By far, the most baffling aspect of my year doing these tests is that, while I was thoroughly unable to perform laser injection testing without breaking sensors, a number of people that came before me \textit{have}. Both Collin Parker and Chris Betancourt succeeded in obtaining results from laser injection testing. They met quite a bit of difficulty in doing so, but it was at least possible. Parker's thesis provides a clue to this. In his thesis, figure 3.7 illustrates the charge collected on a number of sensors as a function of distance from the strip he fired the laser at. I have attempted to reproduce this plot using all the parameters he did. According to him, this plot was produced with a laser power of 515, on an ATLAS07 BZ3 sensor, without a neutral density filter. Without even getting results, it becomes apparent that something has changed between his tests and mine. This is because, when I performed a test with the laser at a power of only 511 without a filter, I made a small crater in the sensor. If 511 causes a crater, then 515 would be absolutely untestable. It would therefore appear that the laser is behaving differently than it did before.
+
+            \begin{figure}[h] 
+                \includegraphics[height=.4\textheight]{charge_collection}
+                \centering
+                \caption{ A reproduction of the results from figure 3.7 of Collin Parker's Bachleour's Thesis. These results come from the sensor ATLAS07 BZ3 W51-P6, biased to -200 volts. I used the black neutral density filter that I used in many of the other experiments I discussed. I aimed the laser at the varying strips for each laser power: LP508-S70, LP509=S70, LP511=S40, LP13=S40, LP515=S20. Unlike Collin's figure, these results only look at one side of the strip. Additionally, he normalize his results to charge per millimeter, while mine are charge per strip. With this sensor, there are 13.42 strips/mm.}
+                \label{fig:charge_collection}
+            \end{figure}
+
+            Nonetheless, I wanted to reproduc his results to the best of my ability, and also lay to rest a question I had wondered for some time: how does the laser's power level affect the amount of charge deposited into the sensor? I performed a study, the results of which are in figure \ref{fig:charge_collection}, which analyzed the charge deposited into the strips of a sensor at different laser power levels. Unfortunately, I believe the 513 and especially 515 results are skewed. While testing the sensor with these higher laser powers, I received an abnormally large number of double and even triple peak results, forcing me to reject the majority of signals that I received on the oscilloscope. I believe that by rejecting so many double and triple peaks, I may have biased the results to favor laser pulses with lower charge, as most of the high charge pulses likely produced double peaks. I think this biasing is responsible for the LP515 data points being \textit{lower} than even the LP509 results.
+
+            Skewing aside, these results confirm something which Vitaliy had stated before, but which we had not previously tested, which is that increasing the laser power does not significantly increase the charge deposited by the laser per pulse. What the laser power primarily changes is the \textit{frequency} of pulses, as evidenced by the increase in the number of double and triple peaks at higher laser powers. Basically, the laser does not burn metal by hitting the metal with a massive pulse of energy, but rather by hitting metal with a huge number of small pulses. This also provides a possible explanation for the other immediately noticable effect of laser power, that when the laser power is too low, voltage peaks simply do not appear. As opposed to the voltage peaks' amplitude gradually falling off at progressively lower laser powers, the voltage peak amplitude very abruptly goes from quite substantial peaks at 508, to basically non-existent at 507. At laser powers lower than 507, I believe the laser fires too inconsistently to be picked up by the oscilloscope.
             
+            What this means for laser injection testing, is that there is no significant difference to the sensor between testing with the laser power at 509 or the laser power at 511. The pulse frequency does not change enough to damage the sensor (so long as a decent filter is in place). My recommendation for laser injection testing then is that the low range of laser power to use should be based on when a laser pulse can be reliably obtained on the oscilloscope. Similarly, the high range should be based on when double and triple peaks become so common as to make testing inconvenient.
 
-
+            
+            
 
 
     \bibliography{ref.bib}    
